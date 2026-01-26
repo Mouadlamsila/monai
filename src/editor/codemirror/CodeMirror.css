@@ -1,0 +1,11 @@
+/**
+ * (c) 2021, Micro:bit Educational Foundation and contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+.cm-editor {
+  height: 100%;
+}
+.cm-focused {
+  outline: none !important;
+}

@@ -1,0 +1,42 @@
+/**
+ * (c) 2021, Micro:bit Educational Foundation and contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+@font-face {
+  font-family: "Source Code Pro";
+  font-style: normal;
+  font-weight: 500;
+  src: local(""),
+    url("https://fonts.microbit.org/source-code-pro/v14/source-code-pro-v14-latin-500.woff2")
+      format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("https://fonts.microbit.org/source-code-pro/v14/source-code-pro-v14-latin-500.woff")
+      format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* Needed for the fallbacks below */
+@supports (height: -webkit-fill-available) {
+  :root {
+    --webkit-vhh: -webkit-fill-available;
+  }
+}
+
+:root {
+  /* Seems to fix a Safari glitch: https://github.com/microbit-foundation/python-editor-v3/issues/369 */
+  font-size: 16px;
+}
+
+html,
+body,
+#root,
+.WorkbenchContainer,
+.Workbench {
+  width: 100%;
+  /* --ios-vvh set by VisualViewPortCSSVariables on iOS only. */
+  height: var(--ios-vvh, var(--webkit-vvh, 100vh));
+}
+body {
+  overflow: hidden;
+}

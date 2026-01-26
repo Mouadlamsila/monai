@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%BASE_URL%favicon.ico" />
+    <link rel="apple-touch-icon" href="%BASE_URL%logo512.png" sizes="512x512" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#6c4bc1" />
+    <title>micro:bit Python Editor</title>
+    <meta
+      name="description"
+      content="A Python Editor for the BBC micro:bit, built by the Micro:bit Educational Foundation and the global Python Community."
+    />
+    <meta property="og:title" content="micro:bit Python Editor" />
+    <meta
+      property="og:description"
+      content="Built by the Micro:bit Educational Foundation and the global Python Community."
+    />
+    <meta
+      name="twitter:description"
+      content="A Python Editor for the BBC micro:bit, built by the Micro:bit Educational Foundation and the global Python Community."
+    />
+    <meta property="og:image" content="%VITE_FULL_URL%social.png" />
+    <% if (typeof VITE_FOUNDATION_BUILD !== 'undefined' && VITE_FOUNDATION_BUILD
+    === 'true') { %>
+    <script
+      src="https://shared-assets.microbit.org/common/v2/common.js"
+      async
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://shared-assets.microbit.org/common/v2/main.css"
+    />
+    <script>
+      // GA config itself is via the common assets config depending on consent.
+      window.dataLayer = window.dataLayer || [];
+      window.gtag =
+        window.gtag ||
+        function () {
+          window.dataLayer.push(arguments);
+        };
+    </script>
+    <script type="text/javascript" id="crowdin-jipt-config">
+      (function () {
+        function escape() {
+          window.location.href = "%VITE_FULL_URL%";
+        }
+        window._jipt = [
+          ["project", "microbitorg"],
+          ["escape", escape],
+        ];
+      })();
+    </script>
+    <% } %>
+    <script type="module" src="/src/index.tsx"></script>
+  </head>
+  <body>
+    <noscript
+      >You need to enable JavaScript to run the Python Editor in your
+      browser.</noscript
+    >
+    <div id="root"></div>
+  </body>
+</html>
