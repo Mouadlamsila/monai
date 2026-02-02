@@ -83,6 +83,8 @@ const SimulatorActionBar = ({
         icon={<RiStopFill />}
         aria-label={intl.formatMessage({ id: "simulator-stop" })}
         isDisabled={running === RunningStatus.STOPPED}
+        borderColor="border.subtle"
+        _hover={{ borderColor: "brand.500", color: "brand.500" }}
       />
       <IconButton
         size={size}
@@ -91,6 +93,8 @@ const SimulatorActionBar = ({
         icon={<RiRefreshLine />}
         aria-label={intl.formatMessage({ id: "simulator-reset" })}
         isDisabled={running === RunningStatus.STOPPED}
+        borderColor="border.subtle"
+        _hover={{ borderColor: "brand.500", color: "brand.500" }}
       />
       <IconButton
         size={size}
@@ -102,6 +106,8 @@ const SimulatorActionBar = ({
             ? intl.formatMessage({ id: "simulator-unmute" })
             : intl.formatMessage({ id: "simulator-mute" })
         }
+        borderColor="border.subtle"
+        _hover={{ borderColor: "brand.500", color: "brand.500" }}
       />
     </HStack>
   );

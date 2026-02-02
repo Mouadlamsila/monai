@@ -19,25 +19,20 @@ import { HighlightStyle } from "@codemirror/language";
 import { tags } from "@lezer/highlight";
 
 export const highlightStyle = () => {
-  const dark = "var(--chakra-colors-code-default)";
   return HighlightStyle.define([
     {
       tag: tags.comment,
       color: "var(--chakra-colors-code-comment)",
     },
-
     { tag: tags.literal, color: "var(--chakra-colors-code-literal)" },
     { tag: tags.string, color: "var(--chakra-colors-code-string)" },
     { tag: tags.keyword, color: "var(--chakra-colors-code-keyword)" },
-    { tag: tags.name, color: dark },
-    { tag: tags.meta, color: dark },
-    { tag: tags.operator, color: dark },
-    { tag: tags.punctuation, color: dark },
-
-    // We can colour these in future to indicate function and method calls
-    // but try after https://github.com/codemirror/lang-python/pull/1 is available
-    // { tag: tags.function(tags.propertyName), color: "orange" },
-    // { tag: tags.function(tags.variableName), color: "orange" },
+    { tag: tags.name, color: "var(--chakra-colors-code-default)" },
+    { tag: tags.meta, color: "var(--chakra-colors-code-default)" },
+    { tag: tags.operator, color: "var(--chakra-colors-code-default)" },
+    { tag: tags.punctuation, color: "var(--chakra-colors-code-default)" },
+    // Bracket matching
+    { tag: tags.bracket, color: "var(--chakra-colors-code-default)" },
   ]);
 };
 

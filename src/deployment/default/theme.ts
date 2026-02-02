@@ -25,6 +25,26 @@ const overrides = {
   space,
   radii,
   colors,
+  semanticTokens: {
+    colors: {
+      "bg.canvas": {
+        default: "#FFFFFF",
+        _dark: "#121212",
+      },
+      "bg.surface": {
+        default: "#F0F2F5",
+        _dark: "#1e1e1e",
+      },
+      "border.subtle": {
+        default: "#E2E8F0",
+        _dark: "#2D2D2D",
+      },
+      "code.bg": {
+        default: "#FFFFFF",
+        _dark: "#121212",
+      },
+    }
+  },
   components: {
     Alert,
     Button,

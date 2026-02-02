@@ -12,17 +12,19 @@ export const themeExtensions = (fontSize: string) => {
       fontSize,
       fontFamily,
       padding: 0,
+      backgroundColor: "var(--chakra-colors-code-bg)",
+      color: "var(--chakra-colors-code-default)",
     },
     ".cm-gutters": {
       // Make it easier to copy code dragging from the left without line numbers.
       userSelect: "none",
       // Must be opaque for horizontal scrolling to work.
-      backgroundColor: "var(--chakra-colors-gray-10)",
+      backgroundColor: "var(--chakra-colors-code-bg)", // Match editor bg
       fontSize,
       fontFamily,
       paddingRight: "1rem",
       border: "unset",
-      color: "var(--chakra-colors-gray-600)",
+      color: "var(--chakra-colors-gray-500)",
     },
     // Widths to accomodate two gutters (lint and line numbers).
     ".cm-gutter.cm-gutter-lint": {
@@ -37,13 +39,12 @@ export const themeExtensions = (fontSize: string) => {
       display: "none",
     },
     ".cm-activeLine": {
-      // Can't use background colour for conflicting purposes.
-      backgroundColor: "unset",
-      outline: "1px solid var(--chakra-colors-gray-100)",
+      backgroundColor: "var(--chakra-colors-code-activeLine)",
+      outline: "none",
     },
     ".cm-activeLineGutter": {
-      backgroundColor: "unset",
-      color: "var(--chakra-colors-gray-800)",
+      backgroundColor: "var(--chakra-colors-code-activeLine)",
+      color: "var(--chakra-colors-code-default)",
     },
     // $wrap can't be styled here, see App.css.
 
@@ -61,18 +62,33 @@ export const themeExtensions = (fontSize: string) => {
       fontFamily,
     },
     ".cm-tooltip": {
-      backgroundColor: "var(--chakra-colors-gray-50) !important",
-      border: "1px solid var(--chakra-colors-gray-400)",
+      backgroundColor: "var(--chakra-colors-bg-surface) !important",
+      border: "1px solid var(--chakra-colors-border-subtle)",
+      color: "var(--chakra-colors-text-primary)", // Need check if this token exists, fallback to body text
     },
     ".cm-tooltip-autocomplete.cm-tooltip": {
       border: "none",
     },
     ".cm-tooltip-autocomplete.cm-tooltip > *": {
-      border: "1px solid var(--chakra-colors-gray-400)",
+      border: "1px solid var(--chakra-colors-border-subtle)",
+    },
+    ".cm-tooltip.cm-completionInfo": {
+      width: "20rem",
+      height: "10.5rem",
+      top: "0 !important",
+      overflowY: "auto",
+      backgroundColor: "var(--chakra-colors-bg-surface)",
+      color: "var(--chakra-colors-gray-800)", // TODO: Semantic token for text
+    },
+    // ... rest unchanged implies I should cover it or use replace carefully.
+    // I am replacing the whole block.
+    ".cm-tooltip.cm-tooltip-autocomplete > ul": {
+      height: "10.5rem",
+      maxHeight: "10.5rem",
     },
     ".cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected]": {
-      background: "#d7d4f0",
-      color: "var(--chakra-colors-gray-800)",
+      background: "var(--chakra-colors-brand-100)",
+      color: "var(--chakra-colors-brand-900)",
     },
     ".cm-tooltip.cm-completionInfo.cm-completionInfo-right": {
       borderLeft: "none",
@@ -90,29 +106,18 @@ export const themeExtensions = (fontSize: string) => {
       left: 0,
       maxWidth: "unset !important",
     },
-    ".cm-tooltip.cm-completionInfo": {
-      width: "20rem",
-      height: "10.5rem",
-      top: "0 !important",
-      overflowY: "auto",
-    },
-    ".cm-tooltip.cm-tooltip-autocomplete > ul": {
-      height: "10.5rem",
-      maxHeight: "10.5rem",
-    },
     ".cm-widgetBuffer": {
       display: "inline",
     },
     ".cm-line": {
       transition: "none",
-      // This used to be the default until https://github.com/codemirror/view/commit/a2d7f9111872fe61ffad8fd3ea371a7a41650da6
       padding: "0 2px 0 4px",
     },
     ".cm-diagnosticAction": {
       marginLeft: 0,
       display: "block",
       backgroundColor: "unset",
-      color: "var(--chakra-colors-brand-600)",
+      color: "var(--chakra-colors-brand-500)",
       fontSize: "0.9em",
       marginTop: "0.2em",
     },
@@ -120,7 +125,7 @@ export const themeExtensions = (fontSize: string) => {
       textDecoration: "underline",
     },
     "ul:focus [aria-selected] .cm-diagnosticAction": {
-      color: "var(--chakra-colors-gray-100)",
+      color: "var(--chakra-colors-brand-700)",
     },
   });
 };

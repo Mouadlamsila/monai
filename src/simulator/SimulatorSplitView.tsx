@@ -59,7 +59,7 @@ const SimulatorSplitView = ({ simRunning }: SimulatorSplitViewProps) => {
       <SplitViewDivider />
       <SplitViewRemainder overflowY="auto">
         <Flex flexDirection="column" height="100%">
-          <VStack spacing={5} bg="gray.25" flex="1 1 auto">
+          <VStack spacing={5} bg="bg.surface" flex="1 1 auto">
             <SimulatorModules flex="1 1 auto" running={simRunning} />
           </VStack>
         </Flex>

@@ -116,7 +116,7 @@ const Simulator = ({
             direction="expandLeft"
           />
         </Flex>
-        <VStack spacing={5} bg="gray.25" ref={simControlsRef}>
+        <VStack spacing={5} bg="bg.surface" ref={simControlsRef}>
           <Box width="100%" pb={1} px={5} maxW="md" minW={minWidth}>
             <AspectRatio ratio={191.27 / 155.77} width="100%">
               <Box

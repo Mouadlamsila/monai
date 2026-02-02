@@ -37,13 +37,21 @@ const SaveMenuButton = ({ size }: SaveMenuButtonProps) => {
   return (
     <HStack>
       <Menu>
-        <ButtonGroup isAttached>
-          <SaveButton mode="button" size={size} borderRight="1px" />
+        <ButtonGroup isAttached variant="outline">
+          <SaveButton
+            mode="button"
+            size={size}
+            borderRight="1px"
+            borderColor="border.subtle"
+            _hover={{ borderColor: "brand.500", color: "brand.500", zIndex: 1 }}
+          />
           <MoreMenuButton
             ref={menuButtonRef}
             aria-label={intl.formatMessage({ id: "more-save-options" })}
             size={size}
             data-testid="more-save-options"
+            borderColor="border.subtle"
+            _hover={{ borderColor: "brand.500", color: "brand.500", zIndex: 1 }}
           />
           <Portal>
             <MenuList zIndex={zIndexAboveTerminal}>

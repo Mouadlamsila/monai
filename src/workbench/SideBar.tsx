@@ -16,8 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { ReactNode, useCallback, useEffect, useMemo, useRef } from "react";
 import { IconType } from "react-icons";
-import { RiLightbulbFlashLine } from "react-icons/ri";
-import { VscFiles, VscLibrary } from "react-icons/vsc";
+import { FiBook, FiFolder, FiZap } from "react-icons/fi";
 import { useIntl } from "react-intl";
 import ErrorBoundary from "../common/ErrorBoundary";
 import PythonLogo from "../common/PythonLogo";
@@ -77,14 +76,14 @@ const SideBar = ({
       {
         id: "reference" as const,
         title: intl.formatMessage({ id: "reference-tab" }),
-        icon: VscLibrary,
+        icon: FiBook,
         contents: <ReferenceArea />,
         color: "gray.25",
       },
       {
         id: "ideas" as const,
         title: intl.formatMessage({ id: "ideas-tab" }),
-        icon: RiLightbulbFlashLine,
+        icon: FiZap,
         contents: <IdeasArea />,
         color: "gray.25",
       },
@@ -99,7 +98,7 @@ const SideBar = ({
       {
         id: "project" as const,
         title: intl.formatMessage({ id: "project-tab" }),
-        icon: VscFiles,
+        icon: FiFolder,
         contents: (
           <ProjectArea
             selectedFile={selectedFile}
@@ -174,7 +173,7 @@ const SideBar = ({
   };
 
   return (
-    <Flex height="100%" direction="column" {...props} backgroundColor="gray.25">
+    <Flex height="100%" direction="column" {...props} backgroundColor="bg.surface">
       <SideBarHeader
         sidebarShown={shown}
         onSidebarToggled={handleSidebarToggled}

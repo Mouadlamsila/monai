@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: MIT
  */
 const fonts = {
-  heading: "Helvetica, Arial, sans-serif",
-  body: "Helvetica, Arial, sans-serif",
-  code: "Source Code Pro, monospace",
+  heading: "Inter, system-ui, sans-serif",
+  body: "Inter, system-ui, sans-serif",
+  code: "'JetBrains Mono', monospace",
 };
 
 export default fonts;

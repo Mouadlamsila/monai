@@ -72,7 +72,7 @@ const RangeSensor = ({
         min={min}
         max={max}
         onChange={handleChange}
-        colorScheme="blackAlpha"
+        colorScheme="brand"
         onMouseEnter={() => handleMouseOverTooltip(true)}
         onMouseLeave={() => handleMouseOverTooltip(false)}
       >

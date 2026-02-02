@@ -114,6 +114,9 @@ const SendButton = React.forwardRef(
                 onFocus={handleFocus}
                 size={size}
                 variant="solid"
+                bg="brand.500"
+                color="white"
+                _hover={{ bg: "brand.600" }}
                 leftIcon={<RiUsbLine />}
                 onClick={() => handleSendToMicrobit(sendButtonRef)}
               >

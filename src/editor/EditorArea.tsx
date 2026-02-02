@@ -3,7 +3,7 @@
  *
  * SPDX-License-Identifier: MIT
  */
-import { Box, BoxProps, Flex, useMediaQuery } from "@chakra-ui/react";
+import { Box, BoxProps, Flex, useMediaQuery, useColorMode, IconButton } from "@chakra-ui/react";
 import React, { ForwardedRef } from "react";
 import { useIntl } from "react-intl";
 import { widthXl } from "../common/media-queries";
@@ -15,6 +15,7 @@ import { WorkbenchSelection } from "../workbench/use-selection";
 import ActiveFileInfo from "./ActiveFileInfo";
 import EditorContainer from "./EditorContainer";
 import UndoRedoControls from "./UndoRedoControls";
+import { FiMoon, FiSun } from "react-icons/fi";
 
 interface EditorAreaProps extends BoxProps {
   selection: WorkbenchSelection;
@@ -40,12 +41,14 @@ const EditorArea = React.forwardRef(
   ) => {
     const intl = useIntl();
     const [isWideScreen] = useMediaQuery(widthXl, { ssr: false });
+    const { colorMode, toggleColorMode } = useColorMode();
+
     return (
       <Flex
         height="100%"
         flexDirection="column"
         {...props}
-        backgroundColor="gray.10"
+        backgroundColor="bg.canvas" // Semantic token
       >
         <Flex
           as="section"
@@ -57,14 +60,29 @@ const EditorArea = React.forwardRef(
           pl={isWideScreen ? "3rem" : "2rem"}
           py={2}
           height={topBarHeight}
+          borderBottom="1px solid"
+          borderColor="border.subtle"
         >
-          <ProjectNameEditable
-            color="gray.700"
-            opacity="80%"
-            fontSize="xl"
-            data-testid="project-name"
-            clickToEdit
-          />
+          <Flex alignItems="center">
+            <ProjectNameEditable
+              color="text.primary"
+              opacity="100%"
+              fontSize="xl"
+              fontWeight="600"
+              data-testid="project-name"
+              clickToEdit
+            />
+            <IconButton
+              aria-label="Toggle dark mode"
+              icon={colorMode === "dark" ? <FiSun /> : <FiMoon />}
+              onClick={toggleColorMode}
+              variant="ghost"
+              size="sm"
+              ml={4}
+              borderRadius="full"
+            />
+          </Flex>
+
           <ActiveFileInfo
             filename={selection.file}
             onSelectedFileChanged={onSelectedFileChanged}
@@ -85,15 +103,8 @@ const EditorArea = React.forwardRef(
             )}
           </Flex>
         </Flex>
-        {/* Just for the line */}
-        <Box
-          ml={isWideScreen ? "6rem" : "5rem"}
-          mr={isWideScreen ? "2.5rem" : "1.25rem"}
-          mb={5}
-          width={isWideScreen ? "calc(100% - 8.5rem)" : "calc(100% - 6.25rem)"}
-          borderBottomWidth={2}
-          borderColor="gray.200"
-        />
+        {/* Removed the separate line Box as we used borderBottom on the header */}
+
         <Box position="relative" flex="1 1 auto" height={0}>
           <UndoRedoControls
             display={["none", "none", "none", "flex"]}
