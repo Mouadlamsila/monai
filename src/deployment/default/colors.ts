@@ -25,6 +25,8 @@ const colors = {
     50: "#DFE2E8",
   },
   code: {
+    bg: "#FFFFFF",
+    selection: "#8CE9A3",
     blockBorder: {
       default: theme.colors.gray[200],
       _dark: "#2D2D2D",
@@ -41,6 +43,13 @@ const colors = {
       default: "#25D366",
       _dark: "#25D366",
     },
+
+    comment: "gray",
+    default: "black",
+    keyword: "darkblue",
+    literal: "darkgreen",
+    string: "#25D366",
+    activeLine: "#E3FAE9",
 
     error: theme.colors.red[500],
   },

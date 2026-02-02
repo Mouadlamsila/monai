@@ -14,20 +14,22 @@ export const themeExtensions = (fontSize: string) => {
       padding: 0,
       backgroundColor: "var(--chakra-colors-code-bg)",
       color: "var(--chakra-colors-code-default)",
-      caretColor: "var(--chakra-colors-code-default)",
       "& ::selection": {
-        backgroundColor: "var(--chakra-colors-code-selection) !important",
+        backgroundColor: "#264F78 !important", // Fallback
+        backgroundImage: "linear-gradient(var(--chakra-colors-code-selection), var(--chakra-colors-code-selection)) !important",
       },
     },
     "&.cm-focused .cm-cursor": {
       borderLeftColor: "var(--chakra-colors-code-default)",
     },
     ".cm-selectionBackground": {
-      backgroundColor: "var(--chakra-colors-code-selection) !important",
+      backgroundColor: "#264F78 !important", // Fallback
+      backgroundImage: "linear-gradient(var(--chakra-colors-code-selection), var(--chakra-colors-code-selection)) !important",
     },
     // Scoped selection background for focused state and specific layer
     "&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground": {
-      backgroundColor: "var(--chakra-colors-code-selection) !important",
+      backgroundColor: "#264F78 !important", // Fallback
+      backgroundImage: "linear-gradient(var(--chakra-colors-code-selection), var(--chakra-colors-code-selection)) !important",
     },
     ".cm-gutters": {
       // Make it easier to copy code dragging from the left without line numbers.
