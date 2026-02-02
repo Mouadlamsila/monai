@@ -14,6 +14,10 @@ export const themeExtensions = (fontSize: string) => {
       padding: 0,
       backgroundColor: "var(--chakra-colors-code-bg)",
       color: "var(--chakra-colors-code-default)",
+      caretColor: "var(--chakra-colors-code-default)",
+    },
+    "&.cm-focused .cm-cursor": {
+      borderLeftColor: "var(--chakra-colors-code-default)",
     },
     ".cm-gutters": {
       // Make it easier to copy code dragging from the left without line numbers.
