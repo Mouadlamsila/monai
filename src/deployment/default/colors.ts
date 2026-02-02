@@ -42,31 +42,6 @@ const colors = {
       _dark: "#25D366",
     },
 
-    comment: {
-      default: "gray",
-      _dark: "#75715E",
-    },
-    default: {
-      default: "black",
-      _dark: "#F8F8F2",
-    },
-    keyword: {
-      default: "#D73A49", // GitHub Red/Pink
-      _dark: "#F92672", // Monokai Pink
-    },
-    literal: {
-      default: "#005CC5", // GitHub Blue
-      _dark: "#AE81FF", // Monokai Purple
-    },
-    string: {
-      default: "#22863A", // GitHub Green
-      _dark: "#25D366", // WhatsApp Green (Emerald-ish)
-    },
-    activeLine: {
-      default: theme.colors.gray[100],
-      _dark: "#2D2D2D",
-    },
-
     error: theme.colors.red[500],
   },
 };

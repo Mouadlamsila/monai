@@ -34,7 +34,7 @@ const ProjectArea = ({
           as="h2"
           fontSize="3xl"
           fontWeight="semibold"
-          color="grey.800"
+          color="text.primary"
           button="after"
           justifyContent="space-between"
           alignItems="flex-start"
@@ -56,14 +56,15 @@ const ProjectArea = ({
               key={f.name}
               fontWeight={selected ? "semibold" : undefined}
               _hover={{
-                bgColor: "blimpTeal.100",
+                bgColor: "var(--chakra-colors-brand-50)",
+                _dark: { bgColor: "whiteAlpha.200" },
               }}
               pl={2}
               pr={1}
               my={1.5}
               cursor={isEditableFile(f.name) ? "pointer" : undefined}
               borderRadius="md"
-              bgColor="white"
+              bgColor="bg.canvas"
               boxShadow="sm"
             >
               <FileRow

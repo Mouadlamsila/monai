@@ -15,9 +15,19 @@ export const themeExtensions = (fontSize: string) => {
       backgroundColor: "var(--chakra-colors-code-bg)",
       color: "var(--chakra-colors-code-default)",
       caretColor: "var(--chakra-colors-code-default)",
+      "& ::selection": {
+        backgroundColor: "var(--chakra-colors-code-selection) !important",
+      },
     },
     "&.cm-focused .cm-cursor": {
       borderLeftColor: "var(--chakra-colors-code-default)",
+    },
+    ".cm-selectionBackground": {
+      backgroundColor: "var(--chakra-colors-code-selection) !important",
+    },
+    // Scoped selection background for focused state and specific layer
+    "&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground": {
+      backgroundColor: "var(--chakra-colors-code-selection) !important",
     },
     ".cm-gutters": {
       // Make it easier to copy code dragging from the left without line numbers.

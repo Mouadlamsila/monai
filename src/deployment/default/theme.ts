@@ -43,6 +43,40 @@ const overrides = {
         default: "#FFFFFF",
         _dark: "#121212",
       },
+      "text.primary": {
+        default: "#1A202C", // gray.800
+        _dark: "#EDF2F7", // gray.100
+      },
+      "code.comment": {
+        default: "#008000", // VSCode Light Green
+        _dark: "#6A9955", // VSCode Dark Green
+      },
+      "code.default": {
+        default: "#000000",
+        _dark: "#D4D4D4", // VSCode Dark Default Text
+      },
+      "code.keyword": {
+        default: "#AF00DB", // VSCode Light Purple
+        _dark: "#C586C0", // VSCode Dark Pink/Purple
+      },
+      "code.literal": {
+        default: "#098658", // VSCode Light Green (Numbers)
+        _dark: "#B5CEA8", // VSCode Dark Light Green
+      },
+      "code.string": {
+        default: "#A31515", // VSCode Light Red
+        _dark: "#CE9178", // VSCode Dark Orange
+      },
+      "code.selection": {
+        default: "#ADD6FF", // VSCode Light Selection
+        _dark: "#264F78", // VSCode Dark Selection
+      },
+      "code.activeLine": {
+        default: "#EDF2F7", // gray.100
+        _dark: "#2D2D2D",
+      },
+      // Error is usually red.500, we can define a token if needed, but highlightStyle usually uses a specific color or just error.
+      // For now, these cover the highlightStyle.ts usage.
     }
   },
   components: {
