@@ -185,7 +185,7 @@ const Home = () => {
       <FeaturesSection />
       <EcosystemSection />
 
-      <footer className="bg-white py-32 text-center relative z-50 rounded-t-[5rem] lg:rounded-t-[10rem] shadow-[0_-50px_100px_rgba(0,0,0,0.1)]">
+      <footer className="bg-white py-32 text-center relative z-20 border-t border-slate-100">
         <div className="text-slate-400 text-[10px] font-black uppercase tracking-widest">
           &copy; {new Date().getFullYear()} Monia.ma
         </div>
