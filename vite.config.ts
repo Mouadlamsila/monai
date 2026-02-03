@@ -11,6 +11,7 @@ import {
 import { VitePWA } from "vite-plugin-pwa";
 import svgr from "vite-plugin-svgr";
 import { configDefaults, defineConfig, UserConfig } from "vitest/config";
+import tailwindcss from '@tailwindcss/vite'
 
 // Support optionally pulling in external branding if the module is installed.
 const theme = "@microbit-foundation/python-editor-v3-microbit";
@@ -88,6 +89,7 @@ export default defineConfig(({ mode }) => {
       viteEjsPlugin({
         data: loadEnv(mode, process.cwd(), "VITE_"),
       }),
+      tailwindcss(),
       react(),
       svgr(),
       VitePWA({

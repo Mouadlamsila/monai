@@ -18,16 +18,13 @@
   font-size: 16px;
 }
 
-html,
-body,
-#root,
-.WorkbenchContainer,
-.Workbench {
+#root .WorkbenchContainer,
+#root .Workbench {
   width: 100%;
   /* --ios-vvh set by VisualViewPortCSSVariables on iOS only. */
   height: var(--ios-vvh, var(--webkit-vvh, 100vh));
 }
 
-body {
+#root .Workbench {
   overflow: hidden;
 }

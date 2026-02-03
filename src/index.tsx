@@ -12,6 +12,7 @@ import reportWebVitals from "./reportWebVitals";
 import { registerSW } from "virtual:pwa-register";
 import { flags } from "./modules/micro_bit_python/flags";
 import { baseUrl } from "./modules/micro_bit_python/base";
+import "./tailwind.css";
 
 if (flags.pwa) {
   registerSW({
