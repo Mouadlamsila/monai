@@ -6,30 +6,30 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { polyfill } from "mobile-drag-drop";
 import { useEffect } from "react";
-import "./App.css";
-import { DialogProvider } from "./common/use-dialogs";
-import VisualViewPortCSSVariables from "./common/VisualViewportCSSVariables";
-import { deployment, useDeployment } from "./deployment";
+import "../modules/micro_bit_python/Microbit.css";
+import { DialogProvider } from "../modules/micro_bit_python/common/use-dialogs";
+import VisualViewPortCSSVariables from "../modules/micro_bit_python/common/VisualViewportCSSVariables";
+import { deployment, useDeployment } from "../modules/micro_bit_python/deployment";
 import { createWebUSBConnection } from "@microbit/microbit-connection";
-import { DeviceContextProvider } from "./device/device-hooks";
-import { MockDeviceConnection } from "./device/mock";
-import DocumentationProvider from "./documentation/documentation-hooks";
-import SearchProvider from "./documentation/search/search-hooks";
-import { ActiveEditorProvider } from "./editor/active-editor-hooks";
-import { FileSystem } from "./fs/fs";
-import { FileSystemProvider } from "./fs/fs-hooks";
-import { createHost } from "./fs/host";
-import { fetchMicroPython } from "./micropython/micropython";
-import { LanguageServerClientProvider } from "./language-server/language-server-hooks";
-import { LoggingProvider } from "./logging/logging-hooks";
-import TranslationProvider from "./messages/TranslationProvider";
-import ProjectDropTarget from "./project/ProjectDropTarget";
-import { RouterProvider } from "./router-hooks";
-import SessionSettingsProvider from "./settings/session-settings";
-import SettingsProvider from "./settings/settings";
-import BeforeUnloadDirtyCheck from "./workbench/BeforeUnloadDirtyCheck";
-import { SelectionProvider } from "./workbench/use-selection";
-import Workbench from "./workbench/Workbench";
+import { DeviceContextProvider } from "../modules/micro_bit_python/device/device-hooks";
+import { MockDeviceConnection } from "../modules/micro_bit_python/device/mock";
+import DocumentationProvider from "../modules/micro_bit_python/documentation/documentation-hooks";
+import SearchProvider from "../modules/micro_bit_python/documentation/search/search-hooks";
+import { ActiveEditorProvider } from "../modules/micro_bit_python/editor/active-editor-hooks";
+import { FileSystem } from "../modules/micro_bit_python/fs/fs";
+import { FileSystemProvider } from "../modules/micro_bit_python/fs/fs-hooks";
+import { createHost } from "../modules/micro_bit_python/fs/host";
+import { fetchMicroPython } from "../modules/micro_bit_python/micropython/micropython";
+import { LanguageServerClientProvider } from "../modules/micro_bit_python/language-server/language-server-hooks";
+import { LoggingProvider } from "../modules/micro_bit_python/logging/logging-hooks";
+import TranslationProvider from "../modules/micro_bit_python/messages/TranslationProvider";
+import ProjectDropTarget from "../modules/micro_bit_python/project/ProjectDropTarget";
+import { RouterProvider } from "../modules/micro_bit_python/router-hooks";
+import SessionSettingsProvider from "../modules/micro_bit_python/settings/session-settings";
+import SettingsProvider from "../modules/micro_bit_python/settings/settings";
+import BeforeUnloadDirtyCheck from "../modules/micro_bit_python/workbench/BeforeUnloadDirtyCheck";
+import { SelectionProvider } from "../modules/micro_bit_python/workbench/use-selection";
+import Workbench from "../modules/micro_bit_python/workbench/Workbench";
 
 const isMockDeviceMode = () =>
   // We use a cookie set from the e2e tests. Avoids having separate test and live builds.
@@ -48,7 +48,7 @@ const fs = new FileSystem(logging, host, fetchMicroPython);
 // If this fails then we retry on access.
 fs.initializeInBackground();
 
-const App = () => {
+const Microbit = () => {
   useEffect(() => {
     logging.event({ type: "boot" });
     device.initialize();
@@ -104,4 +104,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Microbit;

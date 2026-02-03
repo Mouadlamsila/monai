@@ -1,8 +1,9 @@
 
+
 import { Box, Button, Container, Heading, Text, VStack, ChakraProvider } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
-import { deployment } from "./deployment";
+import { deployment } from "../modules/micro_bit_python/deployment";
 
 const Home = () => {
     const navigate = useNavigate();

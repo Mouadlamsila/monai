@@ -15,7 +15,7 @@ import { configDefaults, defineConfig, UserConfig } from "vitest/config";
 // Support optionally pulling in external branding if the module is installed.
 const theme = "@microbit-foundation/python-editor-v3-microbit";
 const external = `node_modules/${theme}`;
-const internal = "src/deployment/default";
+const internal = "src/modules/micro_bit_python/deployment/default";
 
 const featurePwa = process.env.FEATURE_PWA === "true";
 const pwaCacheId =

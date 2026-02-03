@@ -6,12 +6,12 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import App from "./App";
-import Home from "./Home";
+import Microbit from "./pages/Microbit";
+import Home from "./pages/Home";
 import reportWebVitals from "./reportWebVitals";
 import { registerSW } from "virtual:pwa-register";
-import { flags } from "./flags";
-import { baseUrl } from "./base";
+import { flags } from "./modules/micro_bit_python/flags";
+import { baseUrl } from "./modules/micro_bit_python/base";
 
 if (flags.pwa) {
   registerSW({
@@ -68,7 +68,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/microbit/*" element={<App />} />
+        <Route path="/microbit/*" element={<Microbit />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>
