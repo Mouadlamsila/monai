@@ -5,7 +5,9 @@
  */
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
+import Home from "./Home";
 import reportWebVitals from "./reportWebVitals";
 import { registerSW } from "virtual:pwa-register";
 import { flags } from "./flags";
@@ -63,7 +65,12 @@ if (flags.pwa) {
 const root = createRoot(document.getElementById("root")!);
 root.render(
   <StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/microbit/*" element={<App />} />
+      </Routes>
+    </BrowserRouter>
   </StrictMode>
 );
 

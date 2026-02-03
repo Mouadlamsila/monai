@@ -57,6 +57,15 @@ const RouterContext = createContext<RouterContextValue | undefined>(undefined);
 
 const parse = (pathname: string): RouterState => {
   pathname = pathname.slice(baseUrl.length);
+  const prefix = "microbit";
+  if (pathname === prefix) {
+    pathname = "";
+  } else if (pathname.startsWith(prefix + "/")) {
+    pathname = pathname.slice(prefix.length + 1);
+  } else {
+    // Not in our prefix
+    return {};
+  }
   if (pathname) {
     const parts = pathname.split("/");
     const tab = parts[0];
@@ -89,7 +98,7 @@ export const useRouterState = (): RouterContextValue => {
 };
 
 export const toUrl = (state: RouterState): string => {
-  const parts = [state.tab, state.slug?.id];
+  const parts = ["microbit", state.tab, state.slug?.id];
   const pathname = baseUrl + parts.filter((x): x is string => !!x).join("/");
   return window.location.toString().split("/", 1)[0] + pathname;
 };
@@ -143,9 +152,9 @@ export const RouterProvider = ({ children }: { children: ReactNode }) => {
 export const useRouterTabSlug = (
   tab: TabName
 ): [
-  Anchor | undefined,
-  (param: Anchor | undefined, source?: NavigationSource) => void
-] => {
+    Anchor | undefined,
+    (param: Anchor | undefined, source?: NavigationSource) => void
+  ] => {
   const [state, setState] = useRouterState();
   const navigateParam = useCallback(
     (value: Anchor | undefined, source?: NavigationSource) => {
