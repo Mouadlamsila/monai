@@ -20,7 +20,7 @@ const FeaturesSection = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             className="inline-block px-4 py-1.5 rounded bg-slate-900 text-white text-[10px] font-black uppercase tracking-[0.4em] mb-8"
                         >
-                            Technology Stack
+                            The Learning Platform
                         </motion.div>
                         <motion.h2
                             initial={{ opacity: 0, y: 30 }}
@@ -39,8 +39,8 @@ const FeaturesSection = () => {
 
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
                     <BentoCard
-                        title="Unified Kernel"
-                        desc="The ultimate low-latency interface connecting every robot instantly."
+                        title="One Tool, All Robots"
+                        desc="The ultimate interface that connects every robot instantly. No complex setup, just pure coding."
                         icon={Layers}
                         className="lg:col-span-2 shadow-2xl shadow-blue-500/5 min-h-[500px]"
                         delay={0.1}
@@ -59,8 +59,8 @@ const FeaturesSection = () => {
                     </BentoCard>
 
                     <BentoCard
-                        title="Neural Cloud"
-                        desc="Infinite sync for your workspace, powered by secure enterprise grade servers."
+                        title="Cloud Learning"
+                        desc="Your projects are always with you. Start at school, finish at home on any device."
                         icon={Cloud}
                         className="lg:col-span-1 bg-slate-950 text-white border-none min-h-[500px]"
                         delay={0.2}
@@ -81,8 +81,8 @@ const FeaturesSection = () => {
                     </BentoCard>
 
                     <BentoCard
-                        title="AI Co-Pilot"
-                        desc="Convert visual logic into enterprise Python code with a single gesture."
+                        title="Intelligent Buddy"
+                        desc="Our built-in AI assistant helps you fix bugs and learn Python code step-by-step."
                         icon={Sparkles}
                         className="lg:col-span-1 min-h-[500px]"
                         delay={0.3}

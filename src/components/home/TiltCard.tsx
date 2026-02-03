@@ -8,9 +8,10 @@ interface TiltCardProps {
     image: string;
     color: string;
     delay: number;
+    landed?: boolean;
 }
 
-const TiltCard = ({ title, subtitle, image, color, delay }: TiltCardProps) => {
+const TiltCard = ({ title, subtitle, image, color, delay, landed = true }: TiltCardProps) => {
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
@@ -22,21 +23,17 @@ const TiltCard = ({ title, subtitle, image, color, delay }: TiltCardProps) => {
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
             onMouseMove={handleMouseMove}
             className="group relative h-[500px] w-full rounded-[4rem] bg-slate-900 border border-white/5 overflow-hidden flex flex-col justify-end p-12 hover:border-monia-orange/50 transition-all duration-700 shadow-2xl"
         >
             {/* Background Image with Layered Transition */}
             <div
-                className="absolute inset-0 z-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-[2000ms] grayscale-[0.8] group-hover:grayscale-0 opacity-40 group-hover:opacity-100"
+                className={`absolute inset-0 z-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-2000 grayscale-[0.8] group-hover:grayscale-0 ${landed ? 'opacity-40 group-hover:opacity-100' : 'opacity-0'}`}
                 style={{ backgroundImage: `url(${image})` }}
             />
 
             {/* Deep Gradient Overlay */}
-            <div className="absolute inset-0 z-10 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+            <div className="absolute inset-0 z-10 bg-linear-to-t from-slate-950 via-slate-950/20 to-transparent" />
 
             {/* Dynamic Glow Layer */}
             <motion.div
