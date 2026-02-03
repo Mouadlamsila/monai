@@ -127,7 +127,7 @@ const Home = () => {
                 {/* 1. Microbit */}
                 <div className="relative group min-h-[350px]">
                   <motion.div style={{ opacity: hardwareOpacity }}>
-                    <TiltCard title="Micro:bit" subtitle="The classic entry point." image="/assets/images/microbit_pro_photo_1770116696059.png" color="rgba(59, 130, 246, 0.4)" landed={landed1} />
+                    <TiltCard delay={0} title="Micro:bit" subtitle="The classic entry point." image="/assets/images/microbit_pro_photo_1770116696059.png" color="rgba(59, 130, 246, 0.4)" landed={landed1} />
                   </motion.div>
                   {!landed1 && (
                     <motion.div style={{ x: xMicrobit, y: yMicrobit, rotate: rotateMicrobit, zIndex: 50 }} className="absolute inset-0 pointer-events-none rounded-[3rem] overflow-hidden border-2 border-monia-blue/20 bg-slate-900 shadow-2xl">
@@ -139,7 +139,7 @@ const Home = () => {
                 {/* 2. mBot */}
                 <div className="relative group min-h-[350px]">
                   <motion.div style={{ opacity: hardwareOpacity }}>
-                    <TiltCard title="mBot" subtitle="Mechanical robotics." image="/assets/images/mbot_pro_photo_1770116709819.png" color="rgba(6, 182, 212, 0.4)" landed={landed2} />
+                    <TiltCard delay={0} title="mBot" subtitle="Mechanical robotics." image="/assets/images/mbot_pro_photo_1770116709819.png" color="rgba(6, 182, 212, 0.4)" landed={landed2} />
                   </motion.div>
                   {!landed2 && (
                     <motion.div style={{ x: xMBot, y: yMBot, rotate: rotateMBot, zIndex: 50 }} className="absolute inset-0 pointer-events-none rounded-[3rem] overflow-hidden border-2 border-monia-blue/20 bg-slate-900 shadow-2xl">
@@ -151,7 +151,7 @@ const Home = () => {
                 {/* 3. Thymio */}
                 <div className="relative group min-h-[350px]">
                   <motion.div style={{ opacity: hardwareOpacity }}>
-                    <TiltCard title="Thymio" subtitle="Sensors & Light." image="/assets/images/thymio_pro_photo_1770116722459.png" color="rgba(249, 115, 22, 0.4)" landed={landed3} />
+                    <TiltCard delay={0} title="Thymio" subtitle="Sensors & Light." image="/assets/images/thymio_pro_photo_1770116722459.png" color="rgba(249, 115, 22, 0.4)" landed={landed3} />
                   </motion.div>
                   {!landed3 && (
                     <motion.div style={{ x: xThymio, y: yThymio, rotate: rotateThymio, zIndex: 50 }} className="absolute inset-0 pointer-events-none rounded-[3rem] overflow-hidden border-2 border-monia-blue/20 bg-slate-900 shadow-2xl">
@@ -163,7 +163,7 @@ const Home = () => {
                 {/* 4. Dadabit */}
                 <div className="relative group min-h-[350px]">
                   <motion.div style={{ opacity: hardwareOpacity }}>
-                    <TiltCard title="Dadabit" subtitle="Python Power." image="/assets/images/python.png" color="rgba(168, 85, 247, 0.4)" landed={landed4} />
+                    <TiltCard delay={0} title="Dadabit" subtitle="Python Power." image="/assets/images/python.png" color="rgba(168, 85, 247, 0.4)" landed={landed4} />
                   </motion.div>
                   {!landed4 && (
                     <motion.div style={{ x: xDadabit, y: yDadabit, rotate: rotateDadabit, zIndex: 50 }} className="absolute inset-0 pointer-events-none rounded-[3rem] overflow-hidden border-2 border-monia-blue/20 bg-slate-900 shadow-2xl">
@@ -185,7 +185,7 @@ const Home = () => {
       <FeaturesSection />
       <EcosystemSection />
 
-      <footer className="bg-white py-20 text-center relative z-30">
+      <footer className="bg-white py-32 text-center relative z-50 rounded-t-[5rem] lg:rounded-t-[10rem] shadow-[0_-50px_100px_rgba(0,0,0,0.1)]">
         <div className="text-slate-400 text-[10px] font-black uppercase tracking-widest">
           &copy; {new Date().getFullYear()} Monia.ma
         </div>

@@ -1,43 +1,85 @@
 import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Cpu, Bot, Zap, Cloud, Repeat, Layers, CheckCircle, Code2, Sparkles, Box } from "lucide-react";
+import { Cpu, Bot, Zap, Cloud, Layers, Code2, Sparkles, Box } from "lucide-react";
 import BentoCard from "./BentoCard";
 
 const FeaturesSection = () => {
-    const { scrollYProgress } = useScroll();
-    const scale = useTransform(scrollYProgress, [0.1, 0.3], [0.95, 1]);
+    const containerRef = React.useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"]
+    });
+
+    const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.9, 1, 1, 0.95]);
+    const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
+
+    const containerVariants = {
+        hidden: { opacity: 0, y: 100 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 1,
+                ease: [0.22, 1, 0.36, 1],
+                staggerChildren: 0.15,
+                delayChildren: 0.1
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+        }
+    };
 
     return (
         <motion.section
-            style={{ scale }}
-            className="relative z-30 bg-white py-32 lg:py-64 rounded-t-[10rem] -mt-40 overflow-hidden shadow-[0_-50px_100px_rgba(0,0,0,0.2)]"
+            ref={containerRef}
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.05 }}
+            style={{
+                scale,
+                opacity,
+                willChange: "transform, opacity"
+            }}
+            className="relative z-30 bg-white py-32 lg:pb-48 lg:pt-64 rounded-[10rem] -mt-40 overflow-hidden shadow-[0_-50px_100px_rgba(0,0,0,0.05)]"
         >
             <div className="max-w-7xl mx-auto px-6 lg:px-12 text-center lg:text-left">
                 <div className="flex flex-col lg:flex-row items-end justify-between mb-32 gap-12">
                     <div className="flex-1">
                         <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
+                            variants={itemVariants}
                             className="inline-block px-4 py-1.5 rounded bg-slate-900 text-white text-[10px] font-black uppercase tracking-[0.4em] mb-8"
                         >
                             The Learning Platform
                         </motion.div>
                         <motion.h2
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                            variants={itemVariants}
                             className="text-7xl md:text-9xl font-black text-slate-950 tracking-tighter leading-[0.8] uppercase"
                         >
                             One <br />
-                            <span className="text-transparent bg-clip-text bg-linear-to-r from-monia-blue via-slate-400 to-monia-orange">Ecosystem.</span>
+                            <span className="text-transparent bg-clip-text bg-linear-to-r from-monia-blue via-slate-400 to-monia-orange">Platform.</span>
                         </motion.h2>
                     </div>
 
-                    <p className="text-xl text-slate-500 font-bold max-w-sm mb-4 leading-snug">
+                    <motion.p
+                        variants={itemVariants}
+                        className="text-xl text-slate-500 font-bold max-w-sm mb-4 leading-snug"
+                    >
                         We've built a unified interface that bridges the gap between physical hardware and cloud-based intelligence.
-                    </p>
+                    </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <motion.div
+                    variants={containerVariants}
+                    className="grid grid-cols-1 lg:grid-cols-4 gap-6"
+                >
                     <BentoCard
                         title="One Tool, All Robots"
                         desc="The ultimate interface that connects every robot instantly. No complex setup, just pure coding."
@@ -100,9 +142,12 @@ const FeaturesSection = () => {
                             />
                         </div>
                     </BentoCard>
-                </div>
+                </motion.div>
 
-                <div className="mt-24 pt-24 border-t border-slate-100 flex flex-col items-center">
+                <motion.div
+                    variants={itemVariants}
+                    className="mt-24 pt-24 border-t border-slate-100 flex flex-col items-center"
+                >
                     <span className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-400 mb-12">Trusted by 2000+ Schools</span>
                     <div className="flex flex-wrap justify-center gap-16 opacity-30 grayscale contrast-200">
                         <Bot size={40} />
@@ -111,9 +156,9 @@ const FeaturesSection = () => {
                         <Box size={40} />
                         <Layers size={40} />
                     </div>
-                </div>
+                </motion.div>
             </div>
-        </motion.section>
+        </motion.section >
     );
 };
 
