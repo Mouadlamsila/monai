@@ -7,7 +7,7 @@ import {
 
 const Register = () => {
   const [step, setStep] = useState(1);
-  const [role, setRole] = useState(null);
+  const [role, setRole] = useState<string | null>(null);
   const [showPass, setShowPass] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -19,7 +19,7 @@ const Register = () => {
   const nextStep = () => setStep((s) => s + 1);
   const prevStep = () => setStep((s) => s - 1);
 
-  const getPasswordStrength = (pass) => {
+  const getPasswordStrength = (pass: string) => {
     if (!pass) return { label: "Empty", color: "bg-slate-800", width: "0%" };
     if (pass.length < 6) return { label: "Weak", color: "bg-red-500", width: "30%" };
     if (pass.length < 10) return { label: "Medium", color: "bg-yellow-500", width: "60%" };

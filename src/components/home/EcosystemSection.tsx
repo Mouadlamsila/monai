@@ -1,8 +1,8 @@
-import { useRef } from "react";
+
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, FreeMode } from 'swiper/modules';
-import { ArrowUpRight, BookOpen, ShieldCheck, Globe, Star, Users, GraduationCap, Code2, Cpu, Zap } from "lucide-react";
+import { ArrowUpRight, BookOpen, ShieldCheck, Star, Users, GraduationCap, Code2, Zap } from "lucide-react";
 
 // Import Swiper styles
 import 'swiper/css';

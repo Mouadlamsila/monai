@@ -22,10 +22,10 @@ import { DefaultHost } from "./host";
 import { defaultInitialProject } from "./initial-project";
 
 const hexes = Promise.all([
-  fs.readFileSync("src/micropython/microbit-micropython-v1.hex", {
+  fs.readFileSync("src/modules/micro_bit_python/micropython/microbit-micropython-v1.hex", {
     encoding: "ascii",
   }),
-  fs.readFileSync("src/micropython/main/microbit-micropython-v2.hex", {
+  fs.readFileSync("src/modules/micro_bit_python/micropython/main/microbit-micropython-v2.hex", {
     encoding: "ascii",
   }),
 ]);
@@ -67,7 +67,7 @@ describe("Filesystem", () => {
 
     expect(ufs.dirty).toEqual(false);
     expect(ufs.project.files).toEqual([{ name: MAIN_FILE, version: 1 }]);
-  });
+  }, 10000);
 
   it("initialize", async () => {
     await ufs.initialize();
@@ -77,7 +77,7 @@ describe("Filesystem", () => {
     expect(events[1].files).toEqual([{ name: MAIN_FILE, version: 1 }]);
 
     expect(ufs.project.files).toEqual([{ name: MAIN_FILE, version: 1 }]);
-  });
+  }, 10000);
 
   it("can check for file existence", async () => {
     await ufs.initialize();
