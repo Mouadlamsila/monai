@@ -13,6 +13,8 @@ import { registerSW } from "virtual:pwa-register";
 import { flags } from "./modules/micro_bit_python/flags";
 import { baseUrl } from "./modules/micro_bit_python/base";
 import "./tailwind.css";
+import Login from "./Auth/login";
+import Register from "./Auth/register";
 
 if (flags.pwa) {
   registerSW({
@@ -70,6 +72,8 @@ root.render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/microbit/*" element={<Microbit />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

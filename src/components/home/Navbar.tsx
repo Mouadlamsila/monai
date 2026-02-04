@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -59,7 +59,7 @@ const Navbar = () => {
                             <Link to="/programmes" className="text-lg font-bold">Programmes</Link>
                             <Link to="/communaute" className="text-lg font-bold">Communauté</Link>
                             <Link to="/login" className="text-lg font-bold">Connexion</Link>
-                            <Link to="/signup" className="btn-orange-gradient text-center">S'inscrire</Link>
+                            <Link to="/register" className="btn-orange-gradient text-center">S'inscrire</Link>
                         </div>
                     </motion.div>
                 )}

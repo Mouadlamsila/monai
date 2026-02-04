@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import Lenis from "lenis";
 
@@ -10,6 +10,7 @@ import TiltCard from "../components/home/TiltCard";
 import FeaturesSection from "../components/home/FeaturesSection";
 import EcosystemSection from "../components/home/EcosystemSection";
 import { Zap, Sparkles } from "lucide-react";
+import Footer from "../components/home/Footer";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -87,7 +88,7 @@ const Home = () => {
 
             <h1 className="text-5xl lg:text-[5.5rem] font-black tracking-tighter leading-[0.85] mb-6 uppercase">
               <span className="block text-white">Coding &</span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-monia-blue via-white to-monia-orange">Robotics</span>
+              <span className="block text-transparent bg-clip-text bg-linear-to-r from-monia-blue via-white to-monia-orange">Robotics</span>
               <span className="block text-white/50">For Kids.</span>
             </h1>
 
@@ -105,12 +106,12 @@ const Home = () => {
 
           {/* Right Side (Central Visual) */}
           <motion.div style={{ opacity: opacityText }} className="lg:col-span-5 relative h-[500px] lg:h-[650px] flex items-center justify-center pt-20 lg:pt-0">
-            <div className="relative z-20 w-[85%] aspect-[4/5] rounded-[2rem] overflow-hidden border-4 border-slate-900 shadow-2xl rotate-2">
+            <div className="relative z-20 w-[85%] aspect-4/5 rounded-4xl overflow-hidden border-4 border-slate-900 shadow-2xl rotate-2">
               <img src="https://images.unsplash.com/photo-1581091215367-9b6c00b3035a?auto=format&fit=crop&q=80&w=2070" alt="Learning" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-slate-950/60 to-transparent" />
             </div>
             {/* Graphic Accents */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full -z-10 bg-radial-gradient from-white/5 to-transparent blur-[120px]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full -z-10 bg-linear-to-r from-white/5 to-transparent blur-[120px]" />
           </motion.div>
         </div>
 
@@ -185,11 +186,14 @@ const Home = () => {
       <FeaturesSection />
       <EcosystemSection />
 
-      <footer className="bg-white py-32 text-center relative z-20 border-t border-slate-100">
+      {/* <footer className="bg-white py-32 text-center relative z-20 border-t border-slate-100">
         <div className="text-slate-400 text-[10px] font-black uppercase tracking-widest">
           &copy; {new Date().getFullYear()} Monia.ma
         </div>
-      </footer>
+      </footer> */}
+
+      <Footer />
+
     </div>
   );
 };

@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
 import {
-    Trophy, ChevronRight, Crown, Zap, ShieldCheck, Cpu,
+    Trophy, ChevronRight, Crown, ShieldCheck,
     Play, Pause, Volume2, VolumeX, Maximize, SkipForward, SkipBack,
-    Target, Activity
+    Activity
 } from "lucide-react";
 
 // --- 1. CUSTOM VIDEO PLAYER COMPONENT ---
@@ -11,12 +11,12 @@ const VideoSlider = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(true);
     const [isMuted, setIsMuted] = useState(true);
-    const containerRef = useRef(null);
-    const iframeRef = useRef(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const iframeRef = useRef<HTMLIFrameElement>(null);
 
     const videoUrls = ["oJR77TttbrQ", "uMIQR_y00Jc", "668nO6H-y_E"];
 
-    const handleCommand = (func, args = []) => {
+    const handleCommand = (func: string, args: any[] = []) => {
         iframeRef.current?.contentWindow?.postMessage(
             JSON.stringify({ event: "command", func, args }),
             "*"
@@ -60,7 +60,7 @@ const VideoSlider = () => {
                 </motion.div>
             </AnimatePresence>
 
-            <div className="absolute inset-0 z-20 flex flex-col justify-between p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-black/90 via-transparent to-black/60">
+            <div className="absolute inset-0 z-20 flex flex-col justify-between p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-linear-to-t from-black/90 via-transparent to-black/60">
                 <div className="flex justify-between items-start">
                     <div className="bg-blue-600 px-3 py-1.5 rounded-xl flex items-center gap-2 shadow-[0_0_15px_rgba(37,99,235,0.5)]">
                         <Activity size={14} className="text-white animate-pulse" />
@@ -150,7 +150,7 @@ const FeaturesSection = () => {
                             transition={{ delay: 0.2 }}
                             className="text-5xl md:text-8xl font-black text-slate-950 tracking-tighter uppercase leading-none"
                         >
-                            LEVEL UP <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600 italic">YOUR BRAIN.</span>
+                            LEVEL UP <br /> <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-violet-600 italic">YOUR BRAIN.</span>
                         </motion.h2>
                     </div>
 
@@ -166,90 +166,108 @@ const FeaturesSection = () => {
                         </motion.div>
 
                         {/* SIDEBAR STATS */}
+                        {/* SIDEBAR STATS - REFACTORED FOR SLEEK LOOK */}
                         <div className="lg:col-span-4 flex flex-col gap-6">
                             <motion.div
                                 initial={{ x: 100, opacity: 0 }}
                                 whileInView={{ x: 0, opacity: 1 }}
                                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-                                className="flex-1 bg-blue-600 rounded-[3.5rem] p-8 flex flex-col justify-between relative overflow-hidden group shadow-2xl border border-blue-500"
+                                className="flex-1 bg-white rounded-[3.5rem] p-8 flex flex-col justify-between relative overflow-hidden group shadow-xl border border-slate-100"
                             >
-                                <div className="absolute -top-20 -right-20 w-64 h-64 bg-white/10 rounded-full blur-[80px] pointer-events-none" />
+                                {/* Subtle Decorative Circle */}
+                                <div className="absolute -top-20 -right-20 w-64 h-64 bg-blue-50 rounded-full blur-[80px] pointer-events-none" />
 
                                 <div className="relative z-10">
                                     <div className="flex justify-between items-start mb-8">
                                         <div className="relative">
-                                            <div className="w-20 h-20 rounded-[2.5rem] bg-white/20 backdrop-blur-md p-1 border border-white/30 shadow-2xl">
-                                                <div className="w-full h-full rounded-[2.2rem] bg-blue-700 overflow-hidden">
+                                            <div className="w-20 h-20 rounded-[2.5rem] bg-slate-50 p-1 border border-slate-200 shadow-sm">
+                                                <div className="w-full h-full rounded-[2.2rem] bg-slate-100 overflow-hidden">
                                                     <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" className="w-full h-full object-cover" />
                                                 </div>
                                             </div>
-                                            <div className="absolute -bottom-1 -right-1 bg-yellow-400 text-yellow-950 text-[10px] font-black px-2.5 py-1 rounded-full border-2 border-blue-600 shadow-lg">
+                                            <div className="absolute -bottom-1 -right-1 bg-slate-950 text-white text-[9px] font-black px-2.5 py-1 rounded-full border-2 border-white shadow-lg">
                                                 LVL 24
                                             </div>
                                         </div>
-                                        <div className="bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-2 border border-white/20">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                                            <span className="text-[9px] text-white font-black uppercase tracking-widest">Active</span>
+                                        <div className="bg-emerald-50 px-3 py-1.5 rounded-full flex items-center gap-2 border border-emerald-100">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                                            <span className="text-[9px] text-emerald-600 font-black uppercase tracking-widest">Active</span>
                                         </div>
                                     </div>
 
-                                    <div className="mb-3 text-white">
-                                        <h4 className="font-black text-3xl uppercase tracking-tighter italic leading-none">Neo_Explorer</h4>
+                                    <div className="mb-6 text-slate-950">
+                                        <h4 className="font-black text-3xl uppercase tracking-tighter leading-none">Neo_Explorer</h4>
                                         <div className="flex items-center gap-2 mt-2">
-                                            <Crown size={14} className="text-yellow-400" />
-                                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100">Elite Commander</span>
+                                            <Crown size={14} className="text-blue-600" />
+                                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Elite Commander</span>
                                         </div>
                                     </div>
 
-                                    <div className="bg-black/10 border border-white/10 mb-3 rounded-[2.5rem] px-5 py-5 backdrop-blur-sm">
-                                        <div className="text-[9px] font-black text-blue-100/60 uppercase tracking-widest mb-4 ml-1">Active Squad</div>
-                                        <div className="flex items-center gap-3">
+                                    {/* SQUAD SECTION - WITH ORIGINAL COLORS */}
+                                    <div className="bg-slate-50 border border-slate-100 mb-3 rounded-[2.5rem] px-5 py-5 transition-colors group-hover:bg-blue-50/50 group-hover:border-blue-100">
+                                        <div className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-4 ml-1">Active Squad</div>
+                                        <div className="flex items-center ">
                                             <div className="flex -space-x-3">
                                                 {['Aria', 'Cyborg', 'Nova', 'Rex'].map((seed, i) => (
-                                                    <div key={i} className="w-11 h-11 rounded-2xl border-2 border-blue-600 bg-blue-700 overflow-hidden shadow-lg hover:-translate-y-1 transition-transform cursor-pointer">
-                                                        <img src={`https://api.dicebear.com/7.x/bottts/svg?seed=${seed}`} alt="Bot" className="w-full h-full object-cover" />
-                                                    </div>
+                                                    <motion.div
+                                                        key={i}
+                                                        whileHover={{ y: -5, zIndex: 20 }}
+                                                        className="w-11 h-11 rounded-2xl border-2 border-white bg-slate-100 overflow-hidden shadow-sm cursor-pointer transition-transform"
+                                                    >
+                                                        {/* Hna khallina l-color original o hayyadna l-grayscale */}
+                                                        <img
+                                                            src={`https://api.dicebear.com/7.x/bottts/svg?seed=${seed}`}
+                                                            alt="Bot Avatar"
+                                                            className="w-full h-full object-cover"
+                                                        />
+                                                    </motion.div>
                                                 ))}
                                             </div>
-                                            <div className="w-11 h-11 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white text-[10px] font-black">+2</div>
+                                            <div className="w-11 h-11 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-slate-500 text-[10px] font-black shadow-sm mr-2">
+                                                +2
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className=" relative z-10">
+                                <div className="relative z-10 ">
                                     <div className="flex justify-between items-end mb-3 px-1">
-                                        <span className="text-[10px] font-black text-blue-100 uppercase tracking-widest">Mission Sync</span>
-                                        <span className="text-white font-black text-xs italic">62%</span>
+                                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Mission Sync</span>
+                                        <span className="text-slate-950 font-black text-xs">62%</span>
                                     </div>
-                                    <div className="h-3 w-full bg-black/20 rounded-full p-[2px] border border-white/10">
+                                    <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
                                         <motion.div
                                             initial={{ width: 0 }}
                                             whileInView={{ width: "62%" }}
                                             viewport={{ once: true }}
                                             transition={{ duration: 1.5, ease: "easeOut" }}
-                                            className="h-full bg-gradient-to-r from-yellow-300 to-yellow-500 rounded-full shadow-[0_0_15px_rgba(250,204,21,0.5)]"
+                                            className="h-full bg-blue-600 rounded-full shadow-[0_0_10px_rgba(37,99,235,0.3)]"
                                         />
                                     </div>
                                 </div>
                             </motion.div>
 
-                            {/* REWARD POOL */}
+                            {/* REWARD POOL - CLEANER & MORE LUXURIOUS */}
                             <motion.div
                                 initial={{ y: 50, opacity: 0 }}
                                 whileInView={{ y: 0, opacity: 1 }}
                                 transition={{ duration: 0.6, delay: 0.2 }}
                                 whileHover={{ y: -5 }}
-                                className="h-32 bg-gradient-to-br from-yellow-400 via-orange-400 to-yellow-500 rounded-[2.5rem] p-6 flex items-center justify-between shadow-[0_20px_60px_rgba(245,158,11,0.3)] relative overflow-hidden cursor-pointer transform-gpu"
+                                className="h-32 bg-slate-950 rounded-[2.5rem] p-6 flex items-center justify-between shadow-2xl relative overflow-hidden cursor-pointer transform-gpu"
                             >
-                                <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-[#F8FAFC] rounded-full shadow-inner border border-yellow-500/20" />
-                                <div className="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-[#F8FAFC] rounded-full shadow-inner border border-yellow-500/20" />
-                                <motion.div animate={{ x: [-500, 500] }} transition={{ repeat: Infinity, duration: 3 }} className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent w-40 skew-x-12" />
+                                <motion.div
+                                    animate={{ x: [-500, 500] }}
+                                    transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
+                                    className="absolute inset-0 bg-linear-to-r from-transparent via-white/5 to-transparent w-60 skew-x-12"
+                                />
+
                                 <div className="relative z-10 pl-4">
-                                    <div className="text-yellow-950/60 text-[10px] font-black uppercase mb-1 tracking-widest">Reward Pool</div>
-                                    <div className="text-yellow-950 text-5xl font-black italic tracking-tighter leading-none">$5,000</div>
+                                    <div className="text-slate-400 text-[10px] font-black uppercase mb-1 tracking-widest">Reward Pool</div>
+                                    <div className="text-white text-5xl font-black italic tracking-tighter leading-none">$5,000</div>
                                 </div>
-                                <div className="bg-yellow-950/10 p-4 rounded-3xl backdrop-blur-md mr-2">
-                                    <Trophy size={40} className="text-yellow-950" />
+
+                                <div className="bg-white/10 p-4 rounded-3xl backdrop-blur-md mr-2 border border-white/10 group-hover:scale-110 transition-transform">
+                                    <Trophy size={32} className="text-white" />
                                 </div>
                             </motion.div>
                         </div>
@@ -273,7 +291,7 @@ const FeaturesSection = () => {
                                 </video>
 
                                 {/* Minimal Gradient just for buttons legibility */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
+                                <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent z-10" />
                             </div>
 
                             {/* 2. Camera Frame (The Corners) */}
@@ -282,18 +300,6 @@ const FeaturesSection = () => {
                                 <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-white/30 rounded-tr-sm" />
                                 <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-white/30 rounded-bl-sm" />
                                 <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-white/30 rounded-br-sm" />
-                            </div>
-
-                            {/* 3. Bottom Actions - Grid Style but Minimalist */}
-                            <div className="relative z-30 h-full flex flex-col justify-end">
-                                <div className="grid grid-cols-2 gap-px bg-white/20 border border-white/20 p-px backdrop-blur-sm overflow-hidden rounded-xl">
-                                    <button className="bg-black/40 hover:bg-blue-600 transition-all py-4 uppercase font-mono font-black text-[10px] tracking-[0.2em] text-white cursor-pointer">
-                                        BLOCKS
-                                    </button>
-                                    <button className="bg-black/40 hover:bg-white hover:text-black transition-all py-4 uppercase font-mono font-black text-[10px] tracking-[0.2em] text-white cursor-pointer border-l border-white/10">
-                                        SDK
-                                    </button>
-                                </div>
                             </div>
                         </motion.div>
 

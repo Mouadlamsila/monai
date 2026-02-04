@@ -1,151 +1,207 @@
-import React from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { Trophy, Cpu, Gamepad2, Blocks, Rocket, Link2, ShieldCheck, Zap } from "lucide-react";
+import { useRef } from "react";
+import { motion } from "framer-motion";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, FreeMode } from 'swiper/modules';
+import { ArrowUpRight, BookOpen, ShieldCheck, Globe, Star, Users, GraduationCap, Code2, Cpu, Zap } from "lucide-react";
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/autoplay';
 
 const EcosystemSection = () => {
-    const sectionRef = React.useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: sectionRef,
-        offset: ["start end", "end start"]
-    });
+    const robots = [
+        {
+            name: "Micro:bit V2.2",
+            category: "Edge AI & IoT",
+            img: "https://images.unsplash.com/photo-1555617766-c94804975da3?q=80&w=800",
+            specs: ["NRF52833", "Bluetooth 5.0", "Speaker/Mic"]
+        },
+        {
+            name: "mBot Neo",
+            category: "Cyber-Physical",
+            img: "https://images.unsplash.com/photo-1589254065878-42c9da997008?q=80&w=800",
+            specs: ["CyberPi", "Precision Motors", "RGB Sensors"]
+        },
+        {
+            name: "ESP32-S3 Lab",
+            category: "Advanced Robotics",
+            img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800",
+            specs: ["Dual Core", "WiFi/BT", "Neural Engine"]
+        },
+        {
+            name: "Arduino GIGA",
+            category: "High Performance",
+            img: "https://images.unsplash.com/photo-1553406830-ef2513450d76?q=80&w=800",
+            specs: ["STM32H7", "Dual Core", "76 GPIOs"]
+        },
+        {
+            name: "Raspberry Pi 5",
+            category: "Vision Processing",
+            img: "https://images.unsplash.com/photo-1610018556010-6a11b77a90bb?q=80&w=800",
+            specs: ["Quad Core 2.4GHz", "Doris GPU", "8GB RAM"]
+        },
+        {
+            name: "Arduino Uno R3",
+            category: "Microcontroller",
+            img: "https://images.unsplash.com/photo-1561144485-83214e7387be?q=80&w=800",
+            specs: ["ATmega328P", "16MHz", "32KB Flash"]
+        },
+    ];
 
-    const y = useTransform(scrollYProgress, [0, 0.4], [150, 0]);
-    const rotateX = useTransform(scrollYProgress, [0, 0.4], [10, 0]);
-
-    const hardwareItems = [
-        { name: "Micro:bit", type: "V1 & V2", color: "from-blue-500/20 to-blue-600/20", border: "border-blue-500/30" },
-        { name: "mBot", type: "Ranger & Neo", color: "from-cyan-500/20 to-cyan-600/20", border: "border-cyan-500/30" },
-        { name: "Arduino", type: "Uno & Nano", color: "from-teal-500/20 to-teal-600/20", border: "border-teal-500/30" },
-        { name: "ESP32", type: "WiFi & BT", color: "from-purple-500/20 to-purple-600/20", border: "border-purple-500/30" }
+    const stats = [
+        { label: "Active Courses", value: "48+", icon: <BookOpen size={16} /> },
+        { label: "STEM Certified", value: "ISO", icon: <ShieldCheck size={16} /> },
+        { label: "Documentation", value: "2k+", icon: <Code2 size={16} /> },
+        { label: "Global Users", value: "15k+", icon: <Users size={16} /> },
     ];
 
     return (
-        <motion.section
-            ref={sectionRef}
-            style={{
-                y,
-                rotateX,
-                perspective: "1200px",
-                willChange: "transform"
-            }}
-            className="relative z-30 py-48 px-6 lg:px-12 bg-slate-950 overflow-hidden -mt-40"
-        >
-            {/* Background Grid Accent */}
-            <div className="absolute inset-0 opacity-[0.05] pointer-events-none">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#3b82f6_1px,transparent_1px),linear-gradient(to_bottom,#3b82f6_1px,transparent_1px)] bg-[size:40px_40px]" />
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-radial-gradient from-blue-500/20 to-transparent blur-[120px]" />
+        <section className="relative bg-[#020617] py-32 overflow-hidden">
+            {/* Background Ambience */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden text-blue-500 opacity-20">
+                <div className="absolute top-1/4 -left-20 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px] animate-pulse" />
+                <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-indigo-600/20 rounded-full blur-[120px]" />
             </div>
 
-            <div className="max-w-7xl mx-auto relative z-10">
-                <div className="flex flex-col lg:flex-row items-center justify-between gap-12 mb-32">
-                    <div className="text-left max-w-2xl">
-                        <motion.div
+            <div className="max-w-7xl mx-auto px-6 mb-20 w-full relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    <div>
+                        <motion.div 
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
-                            className="flex items-center gap-2 text-blue-500 font-black text-xs uppercase tracking-[0.3em] mb-6"
+                            className="flex items-center gap-3 mb-6"
                         >
-                            <Link2 size={14} /> Unified Ecosystem
+                            <span className="h-[2px] w-8 bg-blue-500 rounded-full"></span>
+                            <span className="text-blue-500 font-mono text-[10px] uppercase tracking-[0.5em] font-bold">The Unified Ecosystem</span>
                         </motion.div>
-                        <motion.h2
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            className="text-6xl lg:text-9xl font-black text-white leading-[0.85] tracking-tighter"
-                        >
-                            One Code. <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-indigo-400 to-slate-500 italic">Every Robot.</span>
-                        </motion.h2>
+                        <h2 className="text-6xl lg:text-[100px] font-black text-white leading-[0.85] tracking-tighter">
+                            Code One. <br />
+                            <span className="text-transparent bg-clip-text bg-linear-to-r from-slate-600 via-slate-400 to-slate-600">Build Many.</span>
+                        </h2>
                     </div>
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        className="p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-[3rem] max-w-sm text-slate-400 font-medium text-lg leading-relaxed"
-                    >
-                        We built a bridge between high-quality software and affordable hardware. Switch between robots without ever changing your workflow.
-                    </motion.div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 auto-rows-[350px]">
-                    {/* Compatibility Grid */}
-                    <div className="lg:col-span-8 grid grid-cols-2 gap-4">
-                        {hardwareItems.map((item, i) => (
-                            <motion.div
-                                key={i}
-                                whileHover={{ scale: 1.02, y: -5 }}
-                                className={`bg-gradient-to-br ${item.color} ${item.border} border p-8 rounded-[2.5rem] flex flex-col justify-between transition-all duration-500 group`}
-                            >
-                                <div className="flex justify-between items-start">
-                                    <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-white backdrop-blur-md">
-                                        <Cpu size={24} />
-                                    </div>
-                                    <div className="text-white/20 group-hover:text-white/50 transition-colors">
-                                        <ShieldCheck size={20} />
-                                    </div>
+                    <div className="lg:pt-20">
+                        <p className="text-lg text-slate-400 max-w-sm leading-relaxed mb-8">
+                            We've eliminated the friction between hardware and software. A professional ecosystem designed for the next generation of engineers.
+                        </p>
+                        <div className="flex gap-4">
+                            {stats.map((stat, i) => (
+                                <div key={i} className="flex flex-col items-start px-4 border-l border-white/10">
+                                    <div className="text-white font-bold text-xl">{stat.value}</div>
+                                    <div className="text-slate-500 text-[9px] uppercase tracking-widest font-black">{stat.label}</div>
                                 </div>
-                                <div>
-                                    <div className="text-2xl font-black text-white">{item.name}</div>
-                                    <div className="text-xs font-bold text-white/40 uppercase tracking-widest">{item.type}</div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-
-                    {/* Feature Highlight */}
-                    <div className="lg:col-span-4 bg-blue-600 rounded-[3rem] p-10 flex flex-col justify-between text-white shadow-2xl shadow-blue-500/30 group overflow-hidden relative">
-                        <div className="relative z-10 flex justify-between items-start">
-                            <Blocks size={48} className="text-white/90 drop-shadow-xl group-hover:rotate-12 transition-transform duration-500" />
-                            <Zap size={24} className="text-blue-200 animate-pulse" />
+                            ))}
                         </div>
-                        <div className="relative z-10">
-                            <div className="text-6xl font-black mb-2 tracking-tighter">50+</div>
-                            <div className="text-sm font-black uppercase tracking-widest text-blue-200 mb-4">DRIVERS & MODULES</div>
-                            <p className="text-blue-100 font-bold leading-relaxed">Continuous updates for the latest sensors and mechanical kits.</p>
-                        </div>
-                        {/* Decoration decoration */}
-                        <div className="absolute -right-20 -bottom-20 w-64 h-64 bg-white/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-1000" />
-                    </div>
-
-                    {/* Bottom row items */}
-                    <div className="lg:col-span-3 bg-slate-900 border border-white/5 rounded-[3rem] p-10 flex flex-col justify-center items-center text-center group cursor-pointer hover:border-blue-500/50 transition-colors">
-                        <Trophy size={64} className="text-amber-500 mb-6 drop-shadow-2xl group-hover:scale-110 transition-transform" />
-                        <div className="text-sm font-black uppercase tracking-[0.3em] text-white">STEM Standard</div>
-                        <div className="text-[10px] font-bold text-slate-500 mt-2">Certified for Schools</div>
-                    </div>
-
-                    <div className="lg:col-span-6 bg-gradient-to-r from-monia-orange to-orange-600 rounded-[3rem] p-10 flex flex-col justify-between text-white relative overflow-hidden group">
-                        <div className="relative z-10 flex items-center gap-4">
-                            <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-md">
-                                <Gamepad2 size={24} />
-                            </div>
-                            <span className="text-xs font-black uppercase tracking-widest text-white/70 italic">Interactive Dashboard</span>
-                        </div>
-                        <div className="relative z-10">
-                            <h3 className="text-5xl font-black tracking-tight leading-none mb-4">Launch Your Lab.</h3>
-                            <button className="flex items-center gap-2 px-6 py-3 bg-white text-orange-600 rounded-xl font-black text-xs hover:scale-105 transition-all">
-                                ACCESS REPOSITORY <Rocket size={14} />
-                            </button>
-                        </div>
-                        {/* Interactive dots visual */}
-                        <div className="absolute right-0 top-0 bottom-0 w-1/2 flex items-center justify-center p-8 pointer-events-none">
-                            <div className="grid grid-cols-4 gap-2 opacity-20 group-hover:opacity-40 transition-opacity">
-                                {[...Array(16)].map((_, i) => (
-                                    <div key={i} className="w-2 h-2 bg-white rounded-full" />
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="lg:col-span-3 bg-slate-900 border border-white/5 rounded-[3rem] p-10 flex flex-col justify-center items-center text-center">
-                        <div className="flex gap-1 mb-6">
-                            {[1, 2, 3].map(i => <div key={i} className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: `${i * 0.2}s` }} />)}
-                        </div>
-                        <div className="text-2xl font-black text-white">UP-TIME</div>
-                        <div className="text-4xl font-black text-blue-500 tracking-tighter">99.9%</div>
-                        <div className="text-[10px] font-black uppercase tracking-widest text-slate-500 mt-2">Cloud Synced</div>
                     </div>
                 </div>
             </div>
-        </motion.section>
+
+            {/* Auto-sliding Robots Carousel */}
+            <div className="relative z-10 w-full mb-32">
+                <Swiper
+                    modules={[Autoplay, FreeMode]}
+                    spaceBetween={40}
+                    slidesPerView={"auto"}
+                    loop={true}
+                    speed={5000}
+                    freeMode={true}
+                    autoplay={{
+                        delay: 0,
+                        disableOnInteraction: false,
+                    }}
+                    className="robots-swiper"
+                >
+                    {robots.map((robot, i) => (
+                        <SwiperSlide key={i} style={{ width: '450px' }}>
+                            <div className="relative aspect-16/10 overflow-hidden rounded-[2.5rem] bg-slate-900 border border-white/5 transition-all duration-500 group-hover:border-blue-500/30 shadow-2xl group">
+                                <img 
+                                    src={robot.img} 
+                                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-100" 
+                                    alt={robot.name} 
+                                />
+                                <div className="absolute inset-0 bg-linear-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-100 group-hover:opacity-80 transition-opacity" />
+                                
+                                <div className="absolute bottom-10 left-10 right-10 flex justify-between items-end">
+                                    <div>
+                                        <div className="flex items-center gap-2 mb-3">
+                                            <span className="px-3 py-1 bg-blue-500/20 text-blue-400 text-[10px] font-bold rounded-full border border-blue-500/30 backdrop-blur-md">
+                                                {robot.category}
+                                            </span>
+                                        </div>
+                                        <h3 className="text-4xl font-black text-white tracking-tighter mb-4">{robot.name}</h3>
+                                        <div className="flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0 duration-500">
+                                            {robot.specs.map((spec, j) => (
+                                                <span key={j} className="text-[9px] text-slate-400 bg-white/5 px-2 py-1 rounded border border-white/10 uppercase tracking-widest font-bold">{spec}</span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <button className="w-14 h-14 rounded-full bg-white text-slate-950 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all scale-75 group-hover:scale-100 duration-500 hover:bg-blue-500 hover:text-white">
+                                        <ArrowUpRight size={24} />
+                                    </button>
+                                </div>
+                            </div>
+                        </SwiperSlide>
+                    ))}
+                    {/* Duplicate slides for infinite seamless loop if needed, but Swiper loop handles it */}
+                </Swiper>
+            </div>
+
+            {/* Quick Info Bar */}
+            <div className="max-w-7xl mx-auto px-6 mb-32 w-full relative z-10 flex flex-wrap justify-between items-center gap-10">
+                <div className="flex -space-x-3">
+                    {[1, 2, 3, 4, 5].map(i => (
+                        <img key={i} src={`https://i.pravatar.cc/100?u=${i + 15}`} className="w-12 h-12 rounded-full border-4 border-[#020617] object-cover" alt="user" />
+                    ))}
+                    <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-[10px] text-white font-black border-4 border-[#020617]">+2.5k</div>
+                </div>
+                
+                <div className="flex flex-wrap gap-8 items-center opacity-40 grayscale">
+                    <div className="flex items-center gap-2 text-white font-mono text-[10px] tracking-widest uppercase"><Star size={14} className="text-yellow-500 fill-yellow-500" /> Trustpilot Rated 4.9/5</div>
+                    <div className="w-px h-6 bg-white/20" />
+                    <div className="flex items-center gap-2 text-white font-mono text-[10px] tracking-widest uppercase"><GraduationCap size={16} /> Professional Certifications</div>
+                    <div className="w-px h-6 bg-white/20" />
+                    <div className="flex items-center gap-2 text-white font-mono text-[10px] tracking-widest uppercase"><Zap size={16} className="text-blue-400" /> Real-time Execution</div>
+                </div>
+            </div>
+
+            {/* Pro Service Interface */}
+            <div className="max-w-7xl mx-auto px-6 mb-20">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5 border border-white/5 rounded-3xl overflow-hidden backdrop-blur-3xl">
+                    <div className="p-12 bg-slate-950/40 hover:bg-slate-900/40 transition-colors relative group">
+                        <BookOpen className="text-blue-500 mb-8" size={32} />
+                        <h4 className="text-xl font-medium text-white mb-4 tracking-tight">Technical Wiki</h4>
+                        <p className="text-slate-500 text-sm leading-relaxed mb-8">Detailed registers, pinouts, and library references for every supported board.</p>
+                        <div className="flex flex-wrap gap-2">
+                            {['PDF', 'Markdown', 'API'].map(tag => (
+                                <span key={tag} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] text-slate-400 font-mono uppercase">{tag}</span>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="p-12 bg-slate-950/40 hover:bg-slate-900/40 transition-colors border-x border-white/5">
+                        <div className="flex -space-x-2 mb-8">
+                            {[1, 2, 3].map(i => (
+                                <img key={i} src={`https://i.pravatar.cc/100?u=${i + 20}`} className="w-10 h-10 rounded-full border-2 border-[#020617]" alt="user" />
+                            ))}
+                            <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-[10px] text-white font-bold">+12k</div>
+                        </div>
+                        <h4 className="text-xl font-medium text-white mb-4 tracking-tight">Active Community</h4>
+                        <p className="text-slate-500 text-sm leading-relaxed">Join thousands of students and engineers sharing code and mechanical builds daily.</p>
+                    </div>
+
+                    <div className="p-12 bg-slate-950/40 hover:bg-slate-900/40 transition-colors">
+                        <div className="mb-8 flex items-center gap-2">
+                            <ShieldCheck className="text-emerald-500" size={32} />
+                            <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                        </div>
+                        <h4 className="text-xl font-medium text-white mb-4 tracking-tight">STEM Certified</h4>
+                        <p className="text-slate-500 text-sm leading-relaxed">Our curriculum is recognized by international standards for robotics education.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     );
 };
 
 export default EcosystemSection;
+

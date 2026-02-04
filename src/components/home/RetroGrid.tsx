@@ -1,4 +1,3 @@
-import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const RetroGrid = () => {
@@ -7,13 +6,12 @@ const RetroGrid = () => {
     // Parallax layers
     const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
     const y2 = useTransform(scrollY, [0, 1000], [0, -200]);
-    const rotate = useTransform(scrollY, [0, 1000], [0, 45]);
     const scale = useTransform(scrollY, [0, 1000], [1, 1.2]);
 
     return (
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
             {/* Base Grid Layer */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#3b82f608_1px,transparent_1px),linear-gradient(to_bottom,#3b82f608_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#3b82f608_1px,transparent_1px),linear-gradient(to_bottom,#3b82f608_1px,transparent_1px)] bg-size-[80px_80px] mask-[radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)]" />
 
             {/* Floating Robotics Image Layer 1 */}
             <motion.div
@@ -44,7 +42,7 @@ const RetroGrid = () => {
             <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-monia-orange/15 rounded-full blur-[120px] animate-pulse delay-1000" />
 
             {/* Vignette */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-950" />
+            <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-slate-950" />
         </div>
     );
 };
