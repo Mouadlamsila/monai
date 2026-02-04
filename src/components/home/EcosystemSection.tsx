@@ -38,13 +38,13 @@ const EcosystemSection = () => {
         {
             name: "Raspberry Pi 5",
             category: "Vision Processing",
-            img: "https://images.unsplash.com/photo-1610018556010-6a11b77a90bb?q=80&w=800",
+            img: "https://thepihut.com/cdn/shop/files/raspberry-pi-5-raspberry-pi-40958498898115.jpg?v=1695819922&width=2048",
             specs: ["Quad Core 2.4GHz", "Doris GPU", "8GB RAM"]
         },
         {
             name: "Arduino Uno R3",
             category: "Microcontroller",
-            img: "https://images.unsplash.com/photo-1561144485-83214e7387be?q=80&w=800",
+            img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Arduino_Uno_-_R3.jpg/250px-Arduino_Uno_-_R3.jpg",
             specs: ["ATmega328P", "16MHz", "32KB Flash"]
         },
     ];

@@ -36,7 +36,7 @@ const Login = () => {
         <div className="hidden lg:block w-1/2 relative overflow-hidden">
           {/* صورة فيها روبوت كايتحرك أو ضواو مجهدين */}
           <img 
-            src="https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=1200" 
+            src="/assets/images/robotique.jpg" 
             className="w-full h-full object-cover object-center" 
             alt="Action Tech" 
           />

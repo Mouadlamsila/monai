@@ -21,14 +21,16 @@ const Navbar = () => {
                 }`}
         >
             <div className="max-w-7xl mx-auto px-6 flex justify-between items-center text-white">
-                <Link to="/" className="text-3xl font-black tracking-tighter flex items-center gap-1 group">
-                    <span className="text-monia-blue transition-colors duration-300">MON</span>
-                    <span className="text-monia-orange">I</span>
-                    <span className="text-monia-blue transition-colors duration-300">A</span>
-                    <motion.span
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                        className="w-2 h-2 rounded-full bg-monia-orange ml-1"
+                <Link to="/" className="flex items-center group">
+                    <img
+                        src="/logo/logo.png"
+                        alt="Logo"
+                        className="h-14 sm:block hidden w-auto object-contain transform group-hover:scale-105 transition-transform ease-in-out duration-200"
+                    />
+                    <img
+                        src="/logo/logo.png"
+                        alt="Logo"
+                        className="h-10 sm:hidden block w-auto object-contain transform group-hover:scale-105 transition-transform ease-in-out duration-200"
                     />
                 </Link>
 

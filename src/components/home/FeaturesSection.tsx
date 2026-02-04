@@ -280,15 +280,9 @@ const FeaturesSection = () => {
                         >
                             {/* 1. Video Layer - High Saturation & Full Opacity on Hover */}
                             <div className="absolute inset-0 z-0">
-                                <video
-                                    autoPlay
-                                    muted
-                                    loop
-                                    playsInline
-                                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 saturate-[1.2] transition-all duration-700"
-                                >
-                                    <source src="/assets/video/0204.mp4" type="video/mp4" />
-                                </video>
+                                
+                                    <img src="/assets/video/scratch.gif" alt="Scratch Animation" className="w-full h-auto" />
+                               
 
                                 {/* Minimal Gradient just for buttons legibility */}
                                 <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent z-10" />
