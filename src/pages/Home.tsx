@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import Lenis from "lenis";
 
@@ -126,7 +126,7 @@ const Home = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {/* 1. Microbit */}
-                <div className="relative group min-h-[350px]">
+                <Link to="/microbit" className="relative group min-h-[350px]">
                   <motion.div style={{ opacity: hardwareOpacity }}>
                     <TiltCard delay={0} title="Micro:bit" subtitle="The classic entry point." image="/assets/images/microbit_pro_photo_1770116696059.png" color="rgba(59, 130, 246, 0.4)" landed={landed1} />
                   </motion.div>
@@ -135,7 +135,7 @@ const Home = () => {
                       <img src="/assets/images/microbit_pro_photo_1770116696059.png" className="w-full h-full object-cover" />
                     </motion.div>
                   )}
-                </div>
+                </Link>
 
                 {/* 2. mBot */}
                 <div className="relative group min-h-[350px]">
