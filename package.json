@@ -109,8 +109,8 @@
     "test:e2e:headless": "playwright test",
     "test:e2e": "playwright test --ui",
     "test": "vitest",
-    "theme:watch": "chakra-cli tokens src/deployment/default/theme.ts --watch",
-    "theme": "chakra-cli tokens src/deployment/default/theme.ts",
+    "theme:watch": "chakra-cli tokens src/modules/micro_bit_python/deployment/default/theme.ts --watch",
+    "theme": "chakra-cli tokens src/modules/micro_bit_python/deployment/default/theme.ts",
     "typecheck": "tsc --noEmit",
     "typecheck:watch": "tsc --noEmit --watch"
   },

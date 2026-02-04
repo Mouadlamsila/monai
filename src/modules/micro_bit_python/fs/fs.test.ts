@@ -22,12 +22,18 @@ import { DefaultHost } from "./host";
 import { defaultInitialProject } from "./initial-project";
 
 const hexes = Promise.all([
-  fs.readFileSync("src/modules/micro_bit_python/micropython/microbit-micropython-v1.hex", {
-    encoding: "ascii",
-  }),
-  fs.readFileSync("src/modules/micro_bit_python/micropython/main/microbit-micropython-v2.hex", {
-    encoding: "ascii",
-  }),
+  fs.readFileSync(
+    "src/modules/micro_bit_python/micropython/microbit-micropython-v1.hex",
+    {
+      encoding: "ascii",
+    }
+  ),
+  fs.readFileSync(
+    "src/modules/micro_bit_python/micropython/main/microbit-micropython-v2.hex",
+    {
+      encoding: "ascii",
+    }
+  ),
 ]);
 
 const fsMicroPythonSource: MicroPythonSource = async () => {
