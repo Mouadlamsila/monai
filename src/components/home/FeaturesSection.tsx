@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
 import {
     Trophy, ChevronRight, Crown, Zap, ShieldCheck, Cpu,
     Play, Pause, Volume2, VolumeX, Maximize, SkipForward, SkipBack,
@@ -39,6 +39,8 @@ const VideoSlider = () => {
     const handleFullscreen = () => {
         if (containerRef.current?.requestFullscreen) containerRef.current.requestFullscreen();
     };
+
+
 
     return (
         <div ref={containerRef} className="relative w-full h-full bg-black group overflow-hidden">
@@ -109,173 +111,250 @@ const VideoSlider = () => {
 
 // --- 2. MAIN FEATURES SECTION ---
 const FeaturesSection = () => {
-    return (
-        <section className="py-24 bg-[#F8FAFC] rounded-[4rem] lg:rounded-[8rem] overflow-hidden">
-            <div className="max-w-7xl mx-auto px-6">
-                <div className="text-center mb-16">
-                    <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="text-5xl md:text-8xl font-black text-slate-950 tracking-tighter uppercase leading-none">
-                        LEVEL UP <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600 italic">YOUR BRAIN.</span>
-                    </motion.h2>
-                </div>
+    const container = useRef(null);
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 auto-rows-[550px]">
-                    {/* VIDEO PLAYER */}
-                    <div className="lg:col-span-8 rounded-[3.5rem] overflow-hidden bg-black shadow-2xl border-8 border-white">
-                        <VideoSlider />
+    const { scrollYProgress } = useScroll({
+        target: container,
+        offset: ["start end", "end start"]
+    });
+
+    // 3D Tilt Effect o Scale
+    const rotateX = useTransform(scrollYProgress, [0, 0.3], [20, 0]);
+    const scale = useTransform(scrollYProgress, [0, 0.3], [0.8, 1]);
+    const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+
+    const smoothRotateX = useSpring(rotateX, { stiffness: 100, damping: 30 });
+    const smoothScale = useSpring(scale, { stiffness: 100, damping: 30 });
+
+    return (
+        /* FIX 1: Zidna margin-bottom bach l-rotate may-khallish l-component y-tlaq m3a li teht mno */
+        <div ref={container} className="perspective-[2000px] py-20 mb-[15vh] overflow-visible">
+            <motion.section
+                style={{
+                    rotateX: smoothRotateX,
+                    scale: smoothScale,
+                    opacity: opacity,
+                    transformStyle: "preserve-3d" // Darouri bach l-3D perspective y-bqa valid
+                }}
+                /* FIX 2: Beddelna overflow-hidden b-overflow-visible bach l-3d elements may-tqet3ouch */
+                className="relative py-24 bg-[#F8FAFC] rounded-[4rem] lg:rounded-[8rem] overflow-visible isolate transform-gpu shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)]"
+            >
+                {/* Backdrop div bach l-content may-banch kharij mn l-border f l-rotation */}
+                <div className="absolute inset-0 bg-[#F8FAFC] -z-10 rounded-[inherit]" />
+
+                <div className="max-w-7xl mx-auto px-6 relative z-10">
+                    <div className="text-center mb-16">
+                        <motion.h2
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
+                            className="text-5xl md:text-8xl font-black text-slate-950 tracking-tighter uppercase leading-none"
+                        >
+                            LEVEL UP <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600 italic">YOUR BRAIN.</span>
+                        </motion.h2>
                     </div>
 
-                    {/* SIDEBAR STATS - ELECTRIC BLUE & YELLOW TICKET */}
-                    <div className="lg:col-span-4 flex flex-col gap-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 auto-rows-[550px]">
+                        {/* VIDEO PLAYER */}
+                        <motion.div
+                            initial={{ x: -100, opacity: 0 }}
+                            whileInView={{ x: 0, opacity: 1 }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="lg:col-span-8 rounded-[3.5rem] overflow-hidden bg-black shadow-2xl border-8 border-white transform-gpu"
+                        >
+                            <VideoSlider />
+                        </motion.div>
 
-                        {/* Main Profile Card: Solid Blue 600 */}
-                        <div className="flex-1 bg-blue-600 rounded-[3.5rem] p-8 flex flex-col justify-between relative overflow-hidden group shadow-2xl border border-blue-500">
+                        {/* SIDEBAR STATS */}
+                        <div className="lg:col-span-4 flex flex-col gap-6">
+                            <motion.div
+                                initial={{ x: 100, opacity: 0 }}
+                                whileInView={{ x: 0, opacity: 1 }}
+                                transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+                                className="flex-1 bg-blue-600 rounded-[3.5rem] p-8 flex flex-col justify-between relative overflow-hidden group shadow-2xl border border-blue-500"
+                            >
+                                <div className="absolute -top-20 -right-20 w-64 h-64 bg-white/10 rounded-full blur-[80px] pointer-events-none" />
 
-                            {/* Subtle Glow Effect */}
-                            <div className="absolute -top-20 -right-20 w-64 h-64 bg-white/10 rounded-full blur-[80px] pointer-events-none" />
-
-                            <div className="relative z-10">
-                                {/* Header: Avatar & Status */}
-                                <div className="flex justify-between items-start mb-8">
-                                    <div className="relative">
-                                        <div className="w-20 h-20 rounded-[2.5rem] bg-white/20 backdrop-blur-md p-1 border border-white/30 shadow-2xl">
-                                            <div className="w-full h-full rounded-[2.2rem] bg-blue-700 overflow-hidden">
-                                                <img
-                                                    src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
-                                                    alt="User"
-                                                    className="w-full h-full object-cover"
-                                                />
+                                <div className="relative z-10">
+                                    <div className="flex justify-between items-start mb-8">
+                                        <div className="relative">
+                                            <div className="w-20 h-20 rounded-[2.5rem] bg-white/20 backdrop-blur-md p-1 border border-white/30 shadow-2xl">
+                                                <div className="w-full h-full rounded-[2.2rem] bg-blue-700 overflow-hidden">
+                                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" className="w-full h-full object-cover" />
+                                                </div>
+                                            </div>
+                                            <div className="absolute -bottom-1 -right-1 bg-yellow-400 text-yellow-950 text-[10px] font-black px-2.5 py-1 rounded-full border-2 border-blue-600 shadow-lg">
+                                                LVL 24
                                             </div>
                                         </div>
-                                        {/* Level Badge in Yellow to match Reward */}
-                                        <div className="absolute -bottom-1 -right-1 bg-yellow-400 text-yellow-950 text-[10px] font-black px-2.5 py-1 rounded-full border-2 border-blue-600 shadow-lg">
-                                            LVL 24
+                                        <div className="bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-2 border border-white/20">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                                            <span className="text-[9px] text-white font-black uppercase tracking-widest">Active</span>
                                         </div>
                                     </div>
 
-                                    <div className="bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-2 border border-white/20">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                                        <span className="text-[9px] text-white font-black uppercase tracking-widest">Active</span>
-                                    </div>
-                                </div>
-
-                                {/* User Title */}
-                                <div className="mb-8 text-white">
-                                    <h4 className="font-black text-3xl uppercase tracking-tighter italic leading-none">Neo_Explorer</h4>
-                                    <div className="flex items-center gap-2 mt-2">
-                                        <Crown size={14} className="text-yellow-400" />
-                                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100">Elite Commander</span>
-                                    </div>
-                                </div>
-
-                                {/* Squad Section - Glass Style over Blue */}
-                                <div className="bg-black/10 border border-white/10 rounded-[2.5rem] p-5 backdrop-blur-sm">
-                                    <div className="text-[9px] font-black text-blue-100/60 uppercase tracking-widest mb-4 ml-1">Active Squad</div>
-                                    <div className="flex items-center gap-3">
-                                        <div className="flex -space-x-3">
-                                            {['Aria', 'Cyborg', 'Nova', 'Rex'].map((seed, i) => (
-                                                <div key={i} className="w-11 h-11 rounded-2xl border-2 border-blue-600 bg-blue-700 overflow-hidden shadow-lg hover:-translate-y-1 transition-transform cursor-pointer">
-                                                    <img src={`https://api.dicebear.com/7.x/bottts/svg?seed=${seed}`} alt="Bot" className="w-full h-full object-cover" />
-                                                </div>
-                                            ))}
+                                    <div className="mb-3 text-white">
+                                        <h4 className="font-black text-3xl uppercase tracking-tighter italic leading-none">Neo_Explorer</h4>
+                                        <div className="flex items-center gap-2 mt-2">
+                                            <Crown size={14} className="text-yellow-400" />
+                                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100">Elite Commander</span>
                                         </div>
-                                        <div className="w-11 h-11 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white text-[10px] font-black">+2</div>
+                                    </div>
+
+                                    <div className="bg-black/10 border border-white/10 mb-3 rounded-[2.5rem] px-5 py-5 backdrop-blur-sm">
+                                        <div className="text-[9px] font-black text-blue-100/60 uppercase tracking-widest mb-4 ml-1">Active Squad</div>
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex -space-x-3">
+                                                {['Aria', 'Cyborg', 'Nova', 'Rex'].map((seed, i) => (
+                                                    <div key={i} className="w-11 h-11 rounded-2xl border-2 border-blue-600 bg-blue-700 overflow-hidden shadow-lg hover:-translate-y-1 transition-transform cursor-pointer">
+                                                        <img src={`https://api.dicebear.com/7.x/bottts/svg?seed=${seed}`} alt="Bot" className="w-full h-full object-cover" />
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <div className="w-11 h-11 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white text-[10px] font-black">+2</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            {/* XP System - Yellow Bar for high contrast */}
-                            <div className="mt-8 relative z-10">
-                                <div className="flex justify-between items-end mb-3 px-1">
-                                    <span className="text-[10px] font-black text-blue-100 uppercase tracking-widest">Mission Sync</span>
-                                    <span className="text-white font-black text-xs italic">62%</span>
+                                <div className=" relative z-10">
+                                    <div className="flex justify-between items-end mb-3 px-1">
+                                        <span className="text-[10px] font-black text-blue-100 uppercase tracking-widest">Mission Sync</span>
+                                        <span className="text-white font-black text-xs italic">62%</span>
+                                    </div>
+                                    <div className="h-3 w-full bg-black/20 rounded-full p-[2px] border border-white/10">
+                                        <motion.div
+                                            initial={{ width: 0 }}
+                                            whileInView={{ width: "62%" }}
+                                            viewport={{ once: true }}
+                                            transition={{ duration: 1.5, ease: "easeOut" }}
+                                            className="h-full bg-gradient-to-r from-yellow-300 to-yellow-500 rounded-full shadow-[0_0_15px_rgba(250,204,21,0.5)]"
+                                        />
+                                    </div>
                                 </div>
-                                <div className="h-3 w-full bg-black/20 rounded-full p-[2px] border border-white/10">
-                                    <motion.div
-                                        initial={{ width: 0 }}
-                                        whileInView={{ width: "62%" }}
-                                        transition={{ duration: 1.5, ease: "easeOut" }}
-                                        className="h-full bg-gradient-to-r from-yellow-300 to-yellow-500 rounded-full shadow-[0_0_15px_rgba(250,204,21,0.5)]"
-                                    />
+                            </motion.div>
+
+                            {/* REWARD POOL */}
+                            <motion.div
+                                initial={{ y: 50, opacity: 0 }}
+                                whileInView={{ y: 0, opacity: 1 }}
+                                transition={{ duration: 0.6, delay: 0.2 }}
+                                whileHover={{ y: -5 }}
+                                className="h-32 bg-gradient-to-br from-yellow-400 via-orange-400 to-yellow-500 rounded-[2.5rem] p-6 flex items-center justify-between shadow-[0_20px_60px_rgba(245,158,11,0.3)] relative overflow-hidden cursor-pointer transform-gpu"
+                            >
+                                <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-[#F8FAFC] rounded-full shadow-inner border border-yellow-500/20" />
+                                <div className="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-[#F8FAFC] rounded-full shadow-inner border border-yellow-500/20" />
+                                <motion.div animate={{ x: [-500, 500] }} transition={{ repeat: Infinity, duration: 3 }} className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent w-40 skew-x-12" />
+                                <div className="relative z-10 pl-4">
+                                    <div className="text-yellow-950/60 text-[10px] font-black uppercase mb-1 tracking-widest">Reward Pool</div>
+                                    <div className="text-yellow-950 text-5xl font-black italic tracking-tighter leading-none">$5,000</div>
                                 </div>
-                            </div>
+                                <div className="bg-yellow-950/10 p-4 rounded-3xl backdrop-blur-md mr-2">
+                                    <Trophy size={40} className="text-yellow-950" />
+                                </div>
+                            </motion.div>
                         </div>
 
-                        {/* REWARD POOL - THE TICKET (KEEPING IT ORIGINAL AS REQUESTED) */}
-                        <motion.div whileHover={{ y: -5 }} className="h-32 bg-gradient-to-br from-yellow-400 via-orange-400 to-yellow-500 rounded-[2.5rem] p-6 flex items-center justify-between shadow-[0_20px_60px_rgba(245,158,11,0.3)] relative overflow-hidden cursor-pointer">
-                            <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-[#F8FAFC] rounded-full shadow-inner border border-yellow-500/20" />
-                            <div className="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-[#F8FAFC] rounded-full shadow-inner border border-yellow-500/20" />
-                            <motion.div animate={{ x: [-500, 500] }} transition={{ repeat: Infinity, duration: 3 }} className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent w-40 skew-x-12" />
+                        <motion.div
+                            initial={{ y: 100, opacity: 0 }}
+                            whileInView={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.8, delay: 0.3 }}
+                            className="lg:col-span-4 rounded-[3.5rem] p-8 relative overflow-hidden shadow-2xl transform-gpu group bg-black h-[550px]"
+                        >
+                            {/* 1. Video Layer - High Saturation & Full Opacity on Hover */}
+                            <div className="absolute inset-0 z-0">
+                                <video
+                                    autoPlay
+                                    muted
+                                    loop
+                                    playsInline
+                                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 saturate-[1.2] transition-all duration-700"
+                                >
+                                    <source src="/assets/video/0204.mp4" type="video/mp4" />
+                                </video>
 
-                            <div className="relative z-10 pl-4">
-                                <div className="text-yellow-950/60 text-[10px] font-black uppercase mb-1 tracking-widest">Reward Pool</div>
-                                <div className="text-yellow-950 text-5xl font-black italic tracking-tighter leading-none">$5,000</div>
+                                {/* Minimal Gradient just for buttons legibility */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
                             </div>
 
-                            <div className="bg-yellow-950/10 p-4 rounded-3xl backdrop-blur-md mr-2">
-                                <Trophy size={40} className="text-yellow-950" />
+                            {/* 2. Camera Frame (The Corners) */}
+                            <div className="absolute inset-10 pointer-events-none z-20">
+                                <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-white/30 rounded-tl-sm" />
+                                <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-white/30 rounded-tr-sm" />
+                                <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-white/30 rounded-bl-sm" />
+                                <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-white/30 rounded-br-sm" />
+                            </div>
+
+                            {/* 3. Bottom Actions - Grid Style but Minimalist */}
+                            <div className="relative z-30 h-full flex flex-col justify-end">
+                                <div className="grid grid-cols-2 gap-px bg-white/20 border border-white/20 p-px backdrop-blur-sm overflow-hidden rounded-xl">
+                                    <button className="bg-black/40 hover:bg-blue-600 transition-all py-4 uppercase font-mono font-black text-[10px] tracking-[0.2em] text-white cursor-pointer">
+                                        BLOCKS
+                                    </button>
+                                    <button className="bg-black/40 hover:bg-white hover:text-black transition-all py-4 uppercase font-mono font-black text-[10px] tracking-[0.2em] text-white cursor-pointer border-l border-white/10">
+                                        SDK
+                                    </button>
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        {/* MISSION CONTROL */}
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            whileInView={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                            className="lg:col-span-8 bg-white rounded-[3.5rem] border border-slate-100 shadow-2xl p-10 flex flex-col md:flex-row gap-10 transform-gpu"
+                        >
+                            <div className="flex-1 flex flex-col justify-center">
+                                <div className="flex items-center gap-2 mb-4">
+                                    <ShieldCheck className="text-emerald-500" />
+                                    <span className="text-emerald-500 font-black uppercase tracking-widest text-xs">Mission Control</span>
+                                </div>
+                                <h3 className="text-5xl font-black text-slate-950 uppercase tracking-tighter mb-4 leading-none">50+ Campaigns</h3>
+                                <p className="text-slate-500 font-bold mb-8 italic text-lg">"Unlock Master Roboticist by finishing hardware missions."</p>
+                                <div className="flex gap-8">
+                                    <div><div className="text-3xl font-black text-slate-900">12/50</div><div className="text-[10px] font-black text-slate-400 uppercase">Complete</div></div>
+                                    <div className="w-[2px] h-12 bg-slate-100" />
+                                    <div><div className="text-3xl font-black text-slate-900">48</div><div className="text-[10px] font-black text-slate-400 uppercase">Badges</div></div>
+                                </div>
+                            </div>
+
+                            <div className="flex-1 rounded-[2.5rem] bg-slate-50 border border-slate-100 p-6 flex flex-col justify-center relative overflow-hidden">
+                                <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">New Unlocks</div>
+                                <div className="grid grid-cols-4 gap-3 relative z-10">
+                                    {[
+                                        { s: 'Zane', t: 'adventurer' }, { s: 'Milo', t: 'bottts' },
+                                        { s: 'Luna', t: 'croodles' }, { s: 'Rex', t: 'pixel-art' },
+                                        { s: 'Kira', t: 'micah' }, { s: 'Nova', t: 'avataaars' },
+                                        { s: 'Giga', t: 'bottts-neutral' }, { s: 'Vera', t: 'big-smile' }
+                                    ].map((item, i) => (
+                                        <motion.div
+                                            key={i} whileHover={{ scale: 1.15, rotate: 5 }}
+                                            className="aspect-square rounded-2xl bg-white border border-slate-200 p-1 flex items-center justify-center grayscale hover:grayscale-0 transition-all cursor-help shadow-sm group/item relative"
+                                        >
+                                            <img src={`https://api.dicebear.com/7.x/${item.t}/svg?seed=${item.s}`} alt="Unlock" className="w-full h-full rounded-xl object-cover" />
+                                            <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[8px] px-2 py-1 rounded opacity-0 group-hover/item:opacity-100 transition-opacity z-20 font-bold uppercase">{item.s} Done</div>
+                                        </motion.div>
+                                    ))}
+                                </div>
                             </div>
                         </motion.div>
                     </div>
 
-                    {/* LOWER GRID: NEURAL LOGIC */}
-                    <div className="lg:col-span-4 bg-violet-600 rounded-[3.5rem] p-10 text-white flex flex-col justify-between relative overflow-hidden shadow-2xl">
-                        <div className="absolute -right-10 -bottom-10 opacity-20 rotate-12"><Cpu size={250} /></div>
-                        <div className="relative z-10">
-                            <h3 className="text-4xl font-black uppercase tracking-tighter leading-none mb-4">Neural <br /> Logic</h3>
-                            <p className="font-bold text-violet-100/70">Build nodes, deploy AI systems instantly.</p>
-                        </div>
-                        <div className="flex gap-2 relative z-10 mt-6">
-                            <div className="px-4 py-2 bg-white/10 rounded-xl text-[10px] font-black uppercase border border-white/20">Blocks</div>
-                            <div className="px-4 py-2 bg-yellow-400 rounded-xl text-[10px] font-black uppercase text-yellow-900 shadow-lg">Python SDK</div>
-                        </div>
-                    </div>
-
-                    {/* MISSION CONTROL */}
-                    <div className="lg:col-span-8 bg-white rounded-[3.5rem] border border-slate-100 shadow-2xl p-10 flex flex-col md:flex-row gap-10">
-                        <div className="flex-1 flex flex-col justify-center">
-                            <div className="flex items-center gap-2 mb-4">
-                                <ShieldCheck className="text-emerald-500" />
-                                <span className="text-emerald-500 font-black uppercase tracking-widest text-xs">Mission Control</span>
-                            </div>
-                            <h3 className="text-5xl font-black text-slate-950 uppercase tracking-tighter mb-4 leading-none">50+ Campaigns</h3>
-                            <p className="text-slate-500 font-bold mb-8 italic text-lg">"Unlock Master Roboticist by finishing hardware missions."</p>
-                            <div className="flex gap-8">
-                                <div><div className="text-3xl font-black text-slate-900">12/50</div><div className="text-[10px] font-black text-slate-400 uppercase">Complete</div></div>
-                                <div className="w-[2px] h-12 bg-slate-100" />
-                                <div><div className="text-3xl font-black text-slate-900">48</div><div className="text-[10px] font-black text-slate-400 uppercase">Badges</div></div>
-                            </div>
-                        </div>
-
-                        {/* RECENT UNLOCKS WITH AVATARS */}
-                        <div className="flex-1 rounded-[2.5rem] bg-slate-50 border border-slate-100 p-6 flex flex-col justify-center relative overflow-hidden">
-                            <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">New Unlocks</div>
-                            <div className="grid grid-cols-4 gap-3 relative z-10">
-                                {[
-                                    { s: 'Zane', t: 'adventurer' }, { s: 'Milo', t: 'bottts' },
-                                    { s: 'Luna', t: 'croodles' }, { s: 'Rex', t: 'pixel-art' },
-                                    { s: 'Kira', t: 'micah' }, { s: 'Nova', t: 'avataaars' },
-                                    { s: 'Giga', t: 'bottts-neutral' }, { s: 'Vera', t: 'big-smile' }
-                                ].map((item, i) => (
-                                    <motion.div
-                                        key={i} whileHover={{ scale: 1.15, rotate: 5 }}
-                                        className="aspect-square rounded-2xl bg-white border border-slate-200 p-1 flex items-center justify-center grayscale hover:grayscale-0 transition-all cursor-help shadow-sm group/item relative"
-                                    >
-                                        <img src={`https://api.dicebear.com/7.x/${item.t}/svg?seed=${item.s}`} alt="Unlock" className="w-full h-full rounded-xl object-cover" />
-                                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[8px] px-2 py-1 rounded opacity-0 group-hover/item:opacity-100 transition-opacity z-20 font-bold uppercase">{item.s} Done</div>
-                                    </motion.div>
-                                ))}
-                            </div>
-                        </div>
+                    <div className="mt-20 flex flex-col items-center">
+                        <motion.button
+                            initial={{ y: 20, opacity: 0 }}
+                            whileInView={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.6 }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="px-16 py-7 bg-slate-950 text-white rounded-[2.5rem] font-black text-2xl uppercase tracking-[0.2em] shadow-2xl flex items-center gap-6 group cursor-pointer border-none"
+                        >
+                            Start Mission <ChevronRight size={28} className="group-hover:translate-x-2 transition-transform" />
+                        </motion.button>
                     </div>
                 </div>
-
-                <div className="mt-20 flex flex-col items-center">
-                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="px-16 py-7 bg-slate-950 text-white rounded-[2.5rem] font-black text-2xl uppercase tracking-[0.2em] shadow-2xl flex items-center gap-6 group cursor-pointer border-none">
-                        Start Mission <ChevronRight size={28} className="group-hover:translate-x-2 transition-transform" />
-                    </motion.button>
-                </div>
-            </div>
-        </section>
+            </motion.section>
+        </div>
     );
 };
 
