@@ -1,6 +1,7 @@
 [Settings]
 [build]
 command = "npm run ci"
+publish = "build"
 [build.environment]
   CI = "true"
 [[redirects]]
