@@ -80,10 +80,11 @@ export const sanityLanguageId = (locale: string): string => {
   return `${parts[0]}-${parts[1].toUpperCase()}`;
 };
 
-export const project = import.meta.env.VITE_SANITY_PROJECT || '1ya4wzt2';
-export const dataset = (flags.cmsPreview
-  ? import.meta.env.VITE_SANITY_PREVIEW_DATASET
-  : import.meta.env.VITE_SANITY_DATASET) || 'apps';
+export const project = import.meta.env.VITE_SANITY_PROJECT || "1ya4wzt2";
+export const dataset =
+  (flags.cmsPreview
+    ? import.meta.env.VITE_SANITY_PREVIEW_DATASET
+    : import.meta.env.VITE_SANITY_DATASET) || "apps";
 
 const queryUrl = (query: string): string => {
   const url = `https://${project}.apicdn.sanity.io/v1/data/query/${dataset}?query=${encodeURIComponent(
@@ -94,7 +95,6 @@ const queryUrl = (query: string): string => {
 
 const fetchContentInternal = async (query: string): Promise<any> => {
   const url = queryUrl(query);
-  console.log(`[Sanity] Fetching: ${url}`);
   
   try {
     const response = await fetch(url);
