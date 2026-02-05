@@ -65,17 +65,6 @@ export const fetchContent = async <T>(
   return fallback;
 };
 
-const fetchContentInternal = async (query: string): Promise<any> => {
-  const response = await fetch(queryUrl(query));
-  if (response.ok) {
-    const { result } = await response.json();
-    if (!result) {
-      throw new Error("Unexpected response format");
-    }
-    return result;
-  }
-  throw new Error("Error fetching content: " + response.status);
-};
 
 export const sanityLanguageId = (locale: string): string => {
   if (!locale) {
@@ -91,13 +80,37 @@ export const sanityLanguageId = (locale: string): string => {
   return `${parts[0]}-${parts[1].toUpperCase()}`;
 };
 
-export const project = import.meta.env.VITE_SANITY_PROJECT;
-export const dataset = flags.cmsPreview
+export const project = import.meta.env.VITE_SANITY_PROJECT || '1ya4wzt2';
+export const dataset = (flags.cmsPreview
   ? import.meta.env.VITE_SANITY_PREVIEW_DATASET
-  : import.meta.env.VITE_SANITY_DATASET;
+  : import.meta.env.VITE_SANITY_DATASET) || 'apps';
 
 const queryUrl = (query: string): string => {
-  return `https://${project}.apicdn.sanity.io/v1/data/query/${dataset}?query=${encodeURIComponent(
+  const url = `https://${project}.apicdn.sanity.io/v1/data/query/${dataset}?query=${encodeURIComponent(
     query
   )}`;
+  return url;
+};
+
+const fetchContentInternal = async (query: string): Promise<any> => {
+  const url = queryUrl(query);
+  console.log(`[Sanity] Fetching: ${url}`);
+  
+  try {
+    const response = await fetch(url);
+    if (response.ok) {
+      const { result } = await response.json();
+      console.log(`[Sanity] Success! Received ${result?.length || 0} items.`);
+      if (!result) {
+        throw new Error("Unexpected response format");
+      }
+      return result;
+    }
+    const errorText = await response.text();
+    console.error(`[Sanity] Server Error ${response.status}:`, errorText);
+    throw new Error("Error fetching content: " + response.status);
+  } catch (err) {
+    console.error("[Sanity] Fetch Exception:", err);
+    throw err;
+  }
 };

@@ -42,9 +42,8 @@ const Highlight = ({
       // Delay until after the opening animation so the full container height is known for the scroll.
       window.setTimeout(() => {
         if (ref.current && scrollable.current) {
-          const stickyHeaderHeight = scrollable.current
-            .querySelector("header")!
-            .getBoundingClientRect().height;
+          const header = scrollable.current.querySelector("header");
+          const stickyHeaderHeight = header ? header.getBoundingClientRect().height : 0;
           const gap = 25;
           scrollable.current.scrollTo({
             top: ref.current.offsetTop - stickyHeaderHeight - gap,
@@ -76,9 +75,9 @@ const Highlight = ({
 
   const style = highlighting
     ? {
-        backgroundColor: "brand.100",
-        transition: "background-color ease-out 0.2s",
-      }
+      backgroundColor: "brand.100",
+      transition: "background-color ease-out 0.2s",
+    }
     : { transition: "background-color ease-in 0.6s" };
   return (
     <Box

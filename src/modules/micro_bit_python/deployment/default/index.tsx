@@ -20,7 +20,7 @@ const stubConsentContext = createContext<CookieConsent | undefined>(
 const squareLogo: ReactNode = (
   <Box
     as="img"
-    src="/logo micro bit/monia (4).png"
+    src="/logo/logo.png"
     alt="Monia Logo"
     width="100%"
     height="100%"
@@ -28,20 +28,20 @@ const squareLogo: ReactNode = (
   />
 );
 
-const horizontalLogo: ReactNode = (
+/* const horizontalLogo: ReactNode = (
   <Box
     as="img"
-    src="/logo micro bit/monia (4).png"
+    src="/logo/logo.png"
     alt="Monia Logo"
     width="100%"
     height="100%"
     objectFit="contain"
   />
-);
+); */
 
 const defaultDeploymentFactory: DeploymentConfigFactory = () => ({
   squareLogo,
-  horizontalLogo,
+  /* horizontalLogo, */
   chakraTheme: theme,
   // This isn't ideal as it's the branded version. You can just remove the field to remove the welcome dialog.
   welcomeVideoYouTubeId: "mREwMW69qKc",
