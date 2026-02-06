@@ -67,7 +67,7 @@ const EcosystemSection = () => {
             <div className="max-w-7xl mx-auto px-6 mb-20 w-full relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                     <div>
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             className="flex items-center gap-3 mb-6"
@@ -114,13 +114,13 @@ const EcosystemSection = () => {
                     {robots.map((robot, i) => (
                         <SwiperSlide key={i} style={{ width: '450px' }}>
                             <div className="relative aspect-16/10 overflow-hidden rounded-[2.5rem] bg-slate-900 border border-white/5 transition-all duration-500 group-hover:border-blue-500/30 shadow-2xl group">
-                                <img 
-                                    src={robot.img} 
-                                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-100" 
-                                    alt={robot.name} 
+                                <img
+                                    src={robot.img}
+                                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-100"
+                                    alt={robot.name}
                                 />
                                 <div className="absolute inset-0 bg-linear-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-100 group-hover:opacity-80 transition-opacity" />
-                                
+
                                 <div className="absolute bottom-10 left-10 right-10 flex justify-between items-end">
                                     <div>
                                         <div className="flex items-center gap-2 mb-3">
@@ -154,7 +154,7 @@ const EcosystemSection = () => {
                     ))}
                     <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-[10px] text-white font-black border-4 border-[#020617]">+2.5k</div>
                 </div>
-                
+
                 <div className="flex flex-wrap gap-8 items-center opacity-40 grayscale">
                     <div className="flex items-center gap-2 text-white font-mono text-[10px] tracking-widest uppercase"><Star size={14} className="text-yellow-500 fill-yellow-500" /> Trustpilot Rated 4.9/5</div>
                     <div className="w-px h-6 bg-white/20" />

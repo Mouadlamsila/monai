@@ -61,7 +61,7 @@ const Navbar = () => {
                             <Link to="/programmes" className="text-lg font-bold">Programmes</Link>
                             <Link to="/communaute" className="text-lg font-bold">Communauté</Link>
                             <Link to="/login" className="text-lg font-bold">Connexion</Link>
-                            <Link to="/register" className="btn-orange-gradient text-center">S'inscrire</Link>
+                            <Link to="/signup" className="btn-orange-gradient text-center">S'inscrire</Link>
                         </div>
                     </motion.div>
                 )}

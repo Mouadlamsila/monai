@@ -56,7 +56,7 @@ const Home = () => {
   const yMicrobit = useTransform(scrollY, [0, landPoint], [flyDistY + 300, 0]);
   const rotateMicrobit = useTransform(scrollY, [0, landPoint], [-12, 0]);
 
-  const xMBot = useTransform(scrollY, [0, landPoint], [250, 0]); //
+  const xMBot = useTransform(scrollY, [0, landPoint], [400, 0]); //
   const yMBot = useTransform(scrollY, [0, landPoint], [flyDistY + 200, 0]);
   const rotateMBot = useTransform(scrollY, [0, landPoint], [8, 0]);
 

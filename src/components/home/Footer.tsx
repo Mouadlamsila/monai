@@ -4,10 +4,10 @@ import { Instagram, Twitter, Linkedin, Youtube, ArrowUpRight } from "lucide-reac
 const Footer = () => {
   return (
     <footer className="relative bg-[#020617] text-white px-6 md:px-20 pt-24 pb-12 overflow-hidden border-t border-white/5">
-      
+
       {/* --- 1. Background Visual Detail (The Giant Majestic Logo) --- */}
       <div className="absolute top-0 right-0 h-full w-full lg:w-[50%] pointer-events-none select-none overflow-hidden">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 1.2, x: 50 }}
           whileInView={{ opacity: 0.3, scale: 1, x: 0 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
@@ -18,10 +18,10 @@ const Footer = () => {
 
           {/* Huge Watermark Logo */}
           <img
-            src="/logo/logo.png" 
+            src="/logo/logo.png"
             alt="Monia Watermark"
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] max-w-[600px] h-auto object-contain brightness-125 grayscale"
-            style={{ 
+            style={{
               maskImage: 'radial-gradient(circle, black 40%, transparent 90%)',
               WebkitMaskImage: 'radial-gradient(circle, black 40%, transparent 90%)'
             }}
@@ -48,12 +48,12 @@ const Footer = () => {
             <p className="text-slate-400 max-w-sm text-lg font-medium leading-relaxed italic border-l-2 border-monia-blue/40 pl-6">
               "The next generation of hardware engineers starts here. Join the ecosystem."
             </p>
-            
+
             <div className="flex items-center gap-6">
               <button className="px-10 py-5 bg-white text-black font-black uppercase text-[11px] tracking-[0.3em] rounded-full hover:bg-monia-blue hover:text-white transition-all duration-500 shadow-xl">
                 Contact Lab
               </button>
-              <motion.div 
+              <motion.div
                 whileHover={{ rotate: 45, scale: 1.1 }}
                 className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center group cursor-pointer hover:border-monia-orange transition-all duration-500"
               >
@@ -92,8 +92,8 @@ const Footer = () => {
               <h3 className="text-[10px] font-black  uppercase tracking-[0.5em] text-monia-blue/80">Connect</h3>
               <div className="flex gap-4">
                 {[Instagram, Twitter, Linkedin, Youtube].map((Icon, i) => (
-                  <motion.div 
-                    key={i} 
+                  <motion.div
+                    key={i}
                     whileHover={{ y: -8, backgroundColor: "rgba(255,255,255,0.08)" }}
                     className="p-4 bg-white/5 rounded-2xl   border border-white/5 cursor-pointer backdrop-blur-sm transition-all"
                   >
@@ -115,7 +115,7 @@ const Footer = () => {
 
           <div className="flex flex-wrap justify-center gap-10 text-[9px] font-black text-slate-600 uppercase tracking-widest">
             <span className="hover:text-white cursor-default transition-colors">LOCATED IN CASABLANCA // MOROCCO</span>
-            
+
           </div>
 
           {/* Animated Bottom Line */}
